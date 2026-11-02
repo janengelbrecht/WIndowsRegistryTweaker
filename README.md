@@ -31,6 +31,8 @@ Programmet giver en overskuelig, grafisk kontrol over 46 dybdegående systempara
 
 ---
 
+Værktøjet er virkelig velegnet til at lære Object Pascal/Free Pascal (Lazarus) pga. den ekstreme detaljegrad i kommenteringen i kildeteksten.
+
 ## 🛠️ Sådan bygger du projektet fra kildekode
 
 ### Forudsætninger
