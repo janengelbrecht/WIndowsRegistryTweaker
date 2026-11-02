@@ -1,246 +1,580 @@
+Undskyld! Du har fuldstændig ret. Målet var et flottere layout, men det må selvfølgelig **ikke** ske på bekostning af dit indhold. Hverken afsnit, forklaringer, PowerShell-kommandoer, arkitekturpunkter, compiler-fejlfinding eller de konkrete trin må skæres væk.
+
+Her er din **fulde, originale tekst i sin helhed**, hvor **absolut intet er slettet eller udeladt** – men sat op i et knivskarpt, professionelt GitHub-layout med moderne typografi, overskuelige tabeller, callout-bokse, kodeblokke og pæne navigationstegn.
+
+Du kan hente filen direkte via knappen herunder, eller kopiere Markdown-koden:
+
+```markdown
 <div align="center">
 
 # 🚀 Windows Registry Tweaker Pro
 
-**Professionelt, hærdet og modulært administrationsværktøj til Microsoft Windows 10 & 11**
-
-[![Platform](https://img.shields.io/badge/Platform-Windows%2010%20%7C%2011%20(64--bit)-0078D6?style=for-the-badge&logo=windows&logoColor=white)](https://www.microsoft.com/windows)
-[![Engine](https://img.shields.io/badge/Language-Free%20Pascal%20%2F%20Lazarus-E95420?style=for-the-badge&logo=delphi&logoColor=white)](https://www.lazarus-ide.org/)
-[![Architecture](https://img.shields.io/badge/Arch-x86__64%20(Win64)-4A154B?style=for-the-badge&logo=target&logoColor=white)]()
-[![License](https://img.shields.io/badge/License-MIT-green.svg?style=for-the-badge)](LICENSE)
+[![Platform](https://img.shields.io/badge/Platform-Windows%2010%20%7C%2011-blue.svg?style=for-the-badge&logo=windows&logoColor=white)](https://www.microsoft.com/windows)
+[![Language](https://img.shields.io/badge/Language-Free%20Pascal%20%2F%20Lazarus-orange.svg?style=for-the-badge&logo=delphi&logoColor=white)](https://www.lazarus-ide.org/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](LICENSE)
 [![Build](https://img.shields.io/badge/Build-Passing-brightgreen.svg?style=for-the-badge)]()
 
-<p align="center">
-  <a href="#-nøglefunktioner">Nøglefunktioner</a> •
-  <a href="#-oversigt-over-tweaks">De 46 Tweaks</a> •
-  <a href="#-installation-og-brug">Installation</a> •
-  <a href="#-kildekode--kompilering">Kompilering</a> •
-  <a href="#-sikkerhed-og-ansvar">Sikkerhed & Backup</a> •
-  <a href="#-fejlfinding-og-recovery">Nødhjælp</a>
-</p>
+**Et professionelt open source-administrations- og hærdningsværktøj til Microsoft Windows 10 og Windows 11, udviklet i Free Pascal og Lazarus IDE.**
 
----
+<p align="center">
+  Programmet giver en overskuelig, grafisk kontrol over 46 dybdegående systemparametre opdelt i 10 kategorier – med dynamisk visning af fordele og risici samt integreret genstarts- og backup-motor.
+</p>
 
 </div>
 
-## 📖 Om Windows Registry Tweaker Pro
+---
 
-**Windows Registry Tweaker Pro** samler 46 gennemtestede, dybdegående optimeringer, sikkerhedshærdninger og privatlivsparametre i én samlet, krystalklar brugerflade. 
+## 📑 Indholdsfortegnelse
 
-I stedet for risikabel manuel redigering i `regedit`, lokale gruppepolitikker (`gpedit.msc`) eller spredte PowerShell- og CMD-scripts, får du en deterministisk platform med:
-
-* **Sikkerhed i højsædet:** Automatisk generering af fulde, importerbare `.reg`-sikkerhedskopier med UTF-16LE og BOM.
-* **Fuld gennemsigtighed:** Live-inspektion af enhver systemindstilling med fordele, risici og teknisk effekt.
-* **Robust 64-bit motor:** Tvinger adgang til 64-bit registreringsdatabasen via `KEY_WOW64_64KEY`, hvilket forhindrer forkert WOW64-omdirigering.
-* **Zero Overhead:** Udviklet i ren compiled Object Pascal (FPC/Lazarus) uden runtime-afhængigheder som .NET Runtime, Electron eller Python.
+1. [Hvad er Windows Registry Tweaker Pro?](#1-hvad-er-windows-registry-tweaker-pro)
+2. [Nøglefunktioner](#2-nøglefunktioner)
+3. [Programmets 10 kategorier og 46 tweaks](#3-programmets-10-kategorier-og-46-tweaks)
+4. [Systemkrav](#4-systemkrav)
+5. [Installation – trin for trin](#5-installation--trin-for-trin)
+6. [Sådan bygger du projektet fra kildekode](#6-sådan-bygger-du-projektet-fra-kildekode)
+7. [Kørsel af programmet – med Administratorrettigheder](#7-kørsel-af-programmet--med-administratorrettigheder)
+8. [Sådan bruges programmet](#8-sådan-bruges-programmet)
+9. [Sikkerhed – læs dette før du begynder](#9-sikkerhed--læs-dette-før-du-begynder)
+10. [Hvad gør man, hvis noget ikke virker efter tweaking?](#10-hvad-gør-man-hvis-noget-ikke-virker-efter-tweaking)
+11. [Konkrete symptomer og løsninger](#11-konkrete-symptomer-og-løsninger)
+12. [Nødhjælp – hvis intet virker](#12-nødhjælp--hvis-intet-virker)
+13. [Sådan undgår du problemer fremover](#13-sådan-undgår-du-problemer-fremover)
+14. [Teknisk arkitektur](#14-teknisk-arkitektur)
+15. [Fejlfinding under bygning](#15-fejlfinding-under-bygning)
+16. [Bidrag og licens](#16-bidrag-og-licens)
 
 ---
 
-## ✨ Nøglefunktioner
+## 1. Hvad er Windows Registry Tweaker Pro?
 
-| Funktion | Beskrivelse |
-| :--- | :--- |
-| **10 Tematiske Faner** | 46 tweaks opdelt efter formål: Responsivitet, Sikkerhed, Kerne, Netværk m.fl. |
-| **Realtidsinspektion** | Hold musen over en boks, eller brug <kbd>Tab</kbd>, for at få en grundig teknisk forklaring. |
-| **Fuld Sikkerhedskopi** | Eksporterer maskinens tilstand til en standardiseret `.reg`-fil (UTF-16LE med `$FEFF` BOM). |
-| **Ren Systemgenstart** | Sikker tildeling af `SeShutdownPrivilege` i Windows-kernen med efterfølgende genstart via menuen. |
-| **Batch-automatisering** | Aktivér eller nulstil hele faneblade med ét klik — eller hele pakken på én gang. |
-| **DPI & Layout Sikring** | Skalerer fejlfrit fra almindelige 1080p-skærme til 4K High-DPI skærme med forstørrelse. |
+Windows Registry Tweaker Pro er et administrationsværktøj, der samler en lang række gennemprøvede systemindstillinger i én enkelt, sikker og overskuelig brugerflade. I stedet for manuelt at navigere rundt i `regedit`, `gpedit.msc`, `powercfg`, `services.msc` og andre spredte systemværktøjer kan du med få klik optimere, hærde og strømline Windows 10 og Windows 11.
 
----
+Programmet er bevidst designet efter fire principper:
 
-## 🗂️ Oversigt over Tweaks
+* **Sikkerhed først** – alle ændringer kan rulles tilbage, og der kan tages en fuld `.reg`-sikkerhedskopi inden ændringer.
+* **Gennemsigtighed** – hver tweak viser præcis, hvad den gør, hvilke fordele den giver, og hvilke risici den medfører.
+* **Robusthed** – programmet validerer rettigheder, datatyper og proceskald, så det ikke crasher eller efterlader systemet i en uheldig tilstand.
+* **Tilgængelighed** – både mus- og tastaturnavigation understøttes, og brugerfladen skalerer korrekt ved høj DPI og forskellige skærmstørrelser.
 
-Nedenfor kan du folde de enkelte kategorier ud for at inspicere de 46 inkluderede tweaks:
-
-<details>
-<summary><b>1. Hurtigere Windows (5 tweaks)</b></summary>
-<br>
-
-| Parameter | Registreringsnøgle / Sti | Standard | Optimeret | Formål |
-| :--- | :--- | :--- | :--- | :--- |
-| **WaitToKillAppTimeout** | `HKCU\Control Panel\Desktop` | `5000` | `2000` | Lukker hængende programmer hurtigere ved shutdown. |
-| **MenuShowDelay** | `HKCU\Control Panel\Desktop` | `400` | `20` | Fjerner forsinkelse når menuer og underpunkter foldes ud. |
-| **AutoEndTasks** | `HKCU\Control Panel\Desktop` | `0` | `1` | Lukker automatisk fastlåste opgaver ved nedlukning. |
-| **SeparateProcess** | `HKCU\...\Explorer\Advanced` | `0` | `1` | Kører Stifinder-mapper adskilt fra proceslinjen. |
-| **NetworkThrottlingIndex** | `HKLM\...\SystemProfile` | `10` | `0xFFFFFFFF` | Fjerner båndbreddebegrænsning for spil og mediastreaming. |
-
-</details>
-
-<details>
-<summary><b>2. Sikkerhed & Privatliv (6 tweaks)</b></summary>
-<br>
-
-| Parameter | Registreringsnøgle / Sti | Standard | Optimeret | Formål |
-| :--- | :--- | :--- | :--- | :--- |
-| **AllowTelemetry** | `HKLM\...\Windows\DataCollection` | `3` | `0` | Deaktiverer Windows telemetri- og brugsdataindsamling. |
-| **USBSTOR Start** | `HKLM\SYSTEM\...\Services\USBSTOR` | `3` | `4` | Blokerer fremmede USB-lagermedier mod malware og tyveri. |
-| **RemoteRegistry Start** | `HKLM\SYSTEM\...\Services\RemoteRegistry`| `3` | `4` | Lukker for fjernadgang til computerens registreringsdatabase. |
-| **NoDriveTypeAutoRun** | `HKCU\...\Policies\Explorer` | `0x91` | `0xFF` | Blokerer automatisk kørsel af kode/scripts på tilsluttede medier. |
-| **VoiceActivationAboveLock**| `HKCU\...\Speech_OneCore\Preferences` | `1` | `0` | Slår stemmeaktivering fra når maskinen er låst. |
-| **DontDisplayLastUserName**| `HKLM\...\Policies\System` | `0` | `1` | Skjuler forrige brugernavn på loginskærmen. |
-
-</details>
-
-<details>
-<summary><b>3. System & Ydeevne (6 tweaks)</b></summary>
-<br>
-
-| Parameter | Type / Sti | Standard | Optimeret | Formål |
-| :--- | :--- | :--- | :--- | :--- |
-| **Dvaletilstand** | `powercfg -h off` | Aktiv | Deaktiveret | Frigiver RAM-størrelse i diskplads på C: (`hiberfil.sys`). |
-| **EnablePrefetcher** | `HKLM\...\PrefetchParameters` | `3` | `0` | Skåner SSD-drev mod unødige skrivehandlinger. |
-| **Win32PrioritySeparation**| `HKLM\...\PriorityControl` | `2` | `38` | Giver aktivt forgrundsvindue maksimal CPU-tid (3:1). |
-| **VBS Deaktivering** | `HKLM\...\DeviceGuard` | `1` | `0` | Fjerner virtualiserings-overhead for maksimal gaming FPS. |
-| **DisablePagingExecutive** | `HKLM\...\Memory Management` | `0` | `1` | Tvinger Windows-kernen til at forblive i hurtig fysisk RAM. |
-| **NtfsDisableLastAccess** | `HKLM\...\FileSystem` | `2` | `1` | Stopper konstante opdateringer af fil-adgangsstempler. |
-
-</details>
-
-<details>
-<summary><b>4. Netværk & Gaming (4 tweaks)</b></summary>
-<br>
-
-| Parameter | Registreringsnøgle / Sti | Standard | Optimeret | Formål |
-| :--- | :--- | :--- | :--- | :--- |
-| **GPU Priority** | `HKLM\...\Tasks\Games` | `2` | `8` | Giver spilgrafik førsteprioritet i GPU-skemalæggeren. |
-| **Priority** | `HKLM\...\Tasks\Games` | `2` | `6` | Prioriterer spiltråde over baggrundsprocesser. |
-| **TcpTimedWaitDelay** | `HKLM\...\Tcpip\Parameters` | `120` | `30` | Frigiver lukkede TCP-porte markant hurtigere. |
-| **NonBestEffortLimit** | `HKLM\...\Policies\Windows\Psched` | `20` | `0` | Frigiver de 20% båndbredde, Windows reserverer til QoS. |
-
-</details>
-
-<details>
-<summary><b>5. Sikkerhedshærdning Del 1 (7 tweaks)</b></summary>
-<br>
-
-| Parameter | Registreringsnøgle / Sti | Standard | Optimeret | Formål |
-| :--- | :--- | :--- | :--- | :--- |
-| **ConsentPromptBehaviorAdmin**| `HKLM\...\Policies\System` | `5` | `2` | Kræver aktiv godkendelse på isoleret skrivebord (UAC). |
-| **Windows Script Host** | `HKLM\SOFTWARE\Microsoft\Windows Script Host\Settings` | `1` | `0` | Spærrer `.vbs`/`.js` scripts (primært ransomware-værn). |
-| **DisableCAD** | `HKLM\...\Policies\System` | `1` | `0` | Tvinger tryk på <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>Del</kbd> mod falske loginskærme. |
-| **ClearPageFileAtShutdown** | `HKLM\...\Memory Management` | `0` | `1` | Overskriver sidefilen ved sluk mod dataudlæsning. |
-| **RestrictAnonymous** | `HKLM\SYSTEM\CurrentControlSet\Control\Lsa` | `0` | `1` | Forhindrer anonyme brugere i at opliste netværksdelinger. |
-| **EncryptionMethodWithXtsOs**| `HKLM\SOFTWARE\Policies\Microsoft\FVE` | `6` | `7` | Gennemtvinger BitLocker 256-bit XTS-AES kryptering. |
-| **SMB1 Server** | `HKLM\...\LanmanServer\Parameters` | `1` | `0` | Lukker den usikre SMBv1-protokol (kendt fra WannaCry). |
-
-</details>
-
-<details>
-<summary><b>6. Sikkerhedshærdning Del 2 (5 tweaks)</b></summary>
-<br>
-
-| Parameter | Registreringsnøgle / Sti | Standard | Optimeret | Formål |
-| :--- | :--- | :--- | :--- | :--- |
-| **BlockMacrosFromInternet** | `HKCU\...\word\security` | `0` | `1` | Blokerer kørsel af makroer i hentede Office-filer. |
-| **fDenyTSConnections** | `HKLM\...\Terminal Server` | `0` | `1` | Lukker port 3389 permanent mod Remote Desktop angreb. |
-| **InactivityTimeoutSecs** | `HKLM\...\Policies\System` | `0` | `900` | Låser maskinen automatisk efter 15 minutters inaktivitet. |
-| **LetAppsAccessCamera** | `HKLM\...\Windows\AppPrivacy` | `0` | `2` | Nægter moderne apps adgang til webkameraet. |
-| **LetAppsAccessMicrophone** | `HKLM\...\Windows\AppPrivacy` | `0` | `2` | Nægter moderne apps adgang til mikrofonen. |
-
-</details>
-
-<details>
-<summary><b>7. Privatliv & Telemetri (7 tweaks)</b></summary>
-<br>
-
-| Parameter | Registreringsnøgle / Sti | Standard | Optimeret | Formål |
-| :--- | :--- | :--- | :--- | :--- |
-| **DisableSearchBoxSuggestions**| `HKCU\...\Policies\Explorer` | `0` | `1` | Fjerner net- og Bing-forslag i Startmenuens søgning. |
-| **AdvertisingInfo Enabled** | `HKCU\...\AdvertisingInfo` | `1` | `0` | Deaktiverer det personlige reklame-ID. |
-| **SubscribedContent-338387** | `HKCU\...\ContentDeliveryManager` | `1` | `0` | Stopper promoverede forslag på låseskærmen. |
-| **DisableLocation** | `HKLM\...\LocationAndSensors` | `0` | `1` | Afbryder alle baggrundslokationstjenester. |
-| **NumberOfHeartbeatsAllowed** | `HKCU\...\Siuf\Rules` | `1` | `0` | Slår konstante feedback-popups fra. |
-| **SilentInstalledAppsEnabled**| `HKCU\...\ContentDeliveryManager` | `1` | `0` | Blokerer automatisk download af bloatware-apps. |
-| **Klassisk Kontekstmenu** | `HKCU\Software\Classes\CLSID\{86ca1aa0...}` | Ny | Aktiv | Gendanner Windows 10 højrekliksmenuen i Windows 11. |
-
-</details>
-
-<details>
-<summary><b>8. Avanceret Kerne & GPU (5 tweaks)</b></summary>
-<br>
-
-| Parameter | Registreringsnøgle / Sti | Standard | Optimeret | Formål |
-| :--- | :--- | :--- | :--- | :--- |
-| **CPU Core Parking Visibility**| `HKLM\...\0cc5b647-c1df...` | `1` | `2` | Låser op for CPU Core Parking i Avanceret Strømstyring. |
-| **HwSchMode (HAGS)** | `HKLM\...\GraphicsDrivers` | `1` | `2` | Aktiverer Hardwareaccelereret GPU-skemalægning. |
-| **LargeSystemCache** | `HKLM\...\Memory Management` | `0` | `1` | Allokerer en større RAM-buffer til fildata (kræver 16GB+). |
-| **WER Disabled** | `HKLM\...\Windows Error Reporting` | `0` | `1` | Slår Microsofts automatiske fejllogning fra ved nedbrud. |
-| **NtfsDisable8dot3NameCreation**| `HKLM\...\FileSystem` | `2` | `1` | Stopper oprettelse af korte DOS-navne på NTFS-drev. |
-
-</details>
-
-<details>
-<summary><b>9. Hardware & Strømstyring (3 tweaks)</b></summary>
-<br>
-
-| Parameter | Registreringsnøgle / Sti | Standard | Optimeret | Formål |
-| :--- | :--- | :--- | :--- | :--- |
-| **PCIe Link State Synlighed** | `HKLM\...\ee12f251-da30...` | `1` | `2` | Gør PCIe strømsparemode synlig i Kontrolpanel. |
-| **HDD-Timeout Synlighed** | `HKLM\...\6738e2c6-ee1b...` | `1` | `2` | Gør mekanisk harddisk-dvale synlig i Kontrolpanel. |
-| **DiagTrack Start** | `HKLM\SYSTEM\...\Services\DiagTrack` | `2` | `4` | Stopper permanent Microsofts diagnosticeringstjeneste. |
-
-</details>
-
-<details>
-<summary><b>10. UI & Systemstrømlining (5 tweaks)</b></summary>
-<br>
-
-| Parameter | Registreringsnøgle / Sti | Standard | Optimeret | Formål |
-| :--- | :--- | :--- | :--- | :--- |
-| **AllowWidgets** | `HKLM\SOFTWARE\Policies\Microsoft\Dsh`| `1` | `0` | Fjerner Widgets-panelet og sparer baggrunds-RAM. |
-| **LaunchTo** | `HKCU\...\Explorer\Advanced` | `2` | `1` | Åbner altid Stifinder i "Denne pc" frem for "Hjem". |
-| **StickyKeys Flags** | `HKCU\Control Panel\Accessibility\StickyKeys`| `510` | `506` | Deaktiverer genvejen (5× Shift) ved hurtige tastetryk i spil. |
-| **DisableStartupSound** | `HKLM\...\Authentication\LogonUI` | `0` | `1` | Slår Windows-opstartslyden permanent fra. |
-| **Fjern 3D-objekter** | `HKLM\...\FolderDescriptions\...` | `Show` | `Hide` | Fjerner mappen 3D-objekter fra oversigten i "Denne pc". |
-
-</details>
+Programmet er udviklet i Free Pascal / Lazarus og er 100 % open source under MIT-licensen.
 
 ---
 
-## 💻 Systemkrav
+## 2. Nøglefunktioner
+
+* **10 specialiserede kategorier** med i alt 46 tweaks, der dækker alt fra UI-responsivitet og telemetri til kerneindstillinger og sikkerhedshærdning.
+* **Realtidsinspektion:** Når musen holdes over et tweak, forklares fordele og ulemper straks i infopanelet nederst.
+* **Fuld sikkerhedskopi:** Eksporterer en komplet, officiel UTF-16LE `.reg`-fil med Byte Order Mark (`$FEFF`), som kan flettes ind igen når som helst.
+* **Integreret genstart:** Beder automatisk kernen om `SeShutdownPrivilege` og udfører en ren systemgenstart direkte fra menuen.
+* **Batch-handlinger:** Aktivér eller gendan alle tweaks på en hel fane med ét klik – eller alle 46 på én gang via menuen.
+* **Hærdet arkitektur:** 100 % 64-bit registreringsdatabaseadgang (`KEY_WOW64_64KEY`), ægte UAC-håndhævelse og race condition-fri proceseksekvering.
+* **Dansk brugerflade** og dansk dokumentation.
+
+---
+
+## 3. Programmets 10 kategorier og 46 tweaks
+
+Programmet er organiseret i ti faneblade, der hver især samler beslægtede indstillinger. Hver kategori kan aktiveres eller rulles tilbage samlet via knapperne i bunden, eller enkeltvis via de individuelle afkrydsningsfelter.
+
+### 1. Hurtigere Windows
+Tweaks, der reducerer ventetid ved opstart, nedlukning og menuåbning.
+* **WaitToKillAppTimeout** – hurtigere lukning af apps ved nedlukning.
+* **MenuShowDelay** – reduceret ventetid på menuer.
+* **AutoEndTasks** – afslut fastlåste opgaver automatisk.
+* **SeparateProcess** – kør Stifinder-mapper i separate processer.
+* **NetworkThrottlingIndex** – deaktiver unødvendig netværks-throttling.
+
+### 2. Sikkerhed & Privatliv
+Grundlæggende beskyttelse mod telemetri, uautoriseret USB-adgang, AutoRun-malware og fjernadgang til registreringsdatabasen.
+* **AllowTelemetry** – deaktiver Windows-telemetri.
+* **USBSTOR Start** – forhindr uautoriseret USB-lageradgang.
+* **RemoteRegistry Start** – deaktiver Remote Registry.
+* **NoDriveTypeAutoRun** – slå AutoRun/AutoPlay helt fra.
+* **VoiceActivationEnableAboveLockscreen** – deaktiver stemmestyring over låseskærmen.
+* **DontDisplayLastUserName** – fjern senest loggede brugernavn på låseskærmen.
+
+### 3. System & Ydeevne
+Kerneindstillinger som Prefetcher, Win32PrioritySeparation, VBS-deaktivering, DisablePagingExecutive og NTFS-tidsstempler. Inkluderer også dvale-tweaket (via powercfg).
+* **Dvale fra** (`powercfg -h off`).
+* **EnablePrefetcher** – deaktiver Prefetcher (kun SSD).
+* **Win32PrioritySeparation** – forøg forgrunds-CPU-prioritet.
+* **EnableVirtualizationBasedSecurity** – slå VBS fra.
+* **DisablePagingExecutive** – behold kernen i RAM.
+* **NtfsDisableLastAccessUpdate** – slå NTFS fil-adgangsstempler fra.
+
+### 4. Netværk & Gaming
+Netværks- og GPU-prioritering for spillere.
+* **GPU Priority** – prioriter spilgrafik.
+* **Priority (Tasks)** – prioriter spilprocesser.
+* **TcpTimedWaitDelay** – hurtigere lukning af døde TCP-forbindelser.
+* **NonBestEffortLimit** – deaktiver QoS-båndbreddereservation.
+
+### 5. Sikkerhedshærdning (Del 1)
+Avancerede sikkerhedspolitikker.
+* **ConsentPromptBehaviorAdmin** – UAC på Secure Desktop.
+* **Windows Script Host Enabled** – bloker WSH mod ransomware.
+* **DisableCAD** – tving sikker CTRL+ALT+DEL ved login.
+* **ClearPageFileAtShutdown** – tøm sidefilen ved nedlukning.
+* **RestrictAnonymous** – deaktiver anonym adgang til delinger.
+* **EncryptionMethodWithXtsOs** – BitLocker 256-bit XTS-AES.
+* **SMB1** – deaktiver SMBv1 (WannaCry-værn).
+
+### 6. Sikkerhedshærdning (Del 2)
+App-specifikke sikkerhedstiltag.
+* **BlockMacrosFromInternet** – bloker makroer fra internettet (Word).
+* **fDenyTSConnections** – bloker RDP.
+* **InactivityTimeoutSecs** – lås computeren efter 15 minutters inaktivitet.
+* **LetAppsAccessCamera** – bloker webkamera for UWP-apps.
+* **LetAppsAccessMicrophone** – bloker mikrofon for UWP-apps.
+
+### 7. Privatliv & Telemetri
+* **DisableSearchBoxSuggestions** – slå Bing-søgninger fra i Start.
+* **AdvertisingInfo Enabled** – deaktiver reklame-ID.
+* **SubscribedContent-338387Enabled** – slå reklameforslag fra på låseskærmen.
+* **DisableLocation** – slå lokationssporing fra.
+* **NumberOfHeartbeatsAllowed** – slå feedback-påmindelser fra.
+* **SilentInstalledAppsEnabled** – forhindr promoverede apps.
+* **Klassisk Win 11-kontekstmenu** (tom nøgle under `CLSID\{86ca1aa0-...}`).
+
+### 8. Avanceret Kerne & GPU
+* **CPU Core Parking synlighed.**
+* **HAGS (HwSchMode).**
+* **LargeSystemCache.**
+* **WER-deaktivering.**
+* **NtfsDisable8dot3NameCreation.**
+
+### 9. Hardware & Strømstyring
+* **PCIe Link State synlighed.**
+* **HDD-timeout synlighed.**
+* **DiagTrack Start** – deaktiver Diagnostics Tracking Service.
+
+### 10. UI & Systemstrømlining
+* **AllowWidgets** – fjern Widget-panelet.
+* **LaunchTo** – åbn Stifinder i "Denne pc".
+* **StickyKeys Flags** – slå Sticky Keys-popup fra.
+* **DisableStartupSound** – deaktiver opstartslyd.
+* **ThisPCPolicy** – fjern "3D-objekter"-mappen.
 
 > [!NOTE]
-> Programmet er bygget specifikt til 64-bit Windows og kan ikke afvikles på Windows 7, 8 eller 32-bit udgaver.
-
-| Komponent | Minimumskrav | Anbefalet |
-| :--- | :--- | :--- |
-| **Styresystem** | Windows 10 (Build 1809 eller nyere) | Windows 11 (23H2 / 24H2) |
-| **Arkitektur** | 64-bit (x86_64 / amd64) | 64-bit |
-| **Rettigheder** | Lokale Administratorrettigheder | Administrator (UAC aktiv) |
-| **RAM** | 4 GB | 16 GB+ *(for tweaks som PagingExecutive/LargeCache)* |
-| **Skærm** | 1280 × 720 | 1920 × 1080 eller højere |
+> **Bemærk:** Nogle tweaks (f.eks. CPU Core Parking og PCIe Link State) gør kun indstillingen synlig i Kontrolpanel → Strømstyring. Du skal selv efterfølgende åbne Kontrolpanel og vælge den ønskede værdi.
 
 ---
 
-## 🚀 Installation og Brug
+## 4. Systemkrav
 
-### 1. Download
-1. Gå til [Releases](../../releases) sektionen her på GitHub.
-2. Hent den seneste zip-pakke: `WinRegistryTweaker_vX.X.zip`.
-3. Udpak mappen et sikkert sted på din computer (f.eks. `C:\Værktøjer\WinRegistryTweaker\`).
+| Ressource | Minimumskrav | Anbefalet |
+| :--- | :--- | :--- |
+| **Styresystem** | Windows 10 (1809) eller Windows 11 | Windows 11 23H2 eller nyere |
+| **Arkitektur** | 64-bit | 64-bit |
+| **Rettigheder** | Administrator | Administrator |
+| **RAM** | 4 GB | 16 GB (for RAM-krævende tweaks) |
+| **Diskplads** | ca. 50 MB | ca. 100 MB |
+| **Skærm** | 1280×720 | 1920×1080 eller højere |
 
-### 2. Kørsel med Administratorrettigheder
-Programmet konfigurerer parametre i `HKEY_LOCAL_MACHINE` og kalder operativsystemets kerne. 
+> [!IMPORTANT]
+> **Bemærk:** Programmet kan ikke køre på Windows 7, 8 eller 8.1. Det kræver Windows 10 eller nyere.
+
+---
+
+## 5. Installation – trin for trin
+
+### 5.1 Hent programmet
+Der er to måder at anskaffe programmet på:
+
+**A. Download en færdigbygget .exe-fil (anbefalet for almindelige brugere):**
+1. Gå til projektets Releases-side på GitHub.
+2. Download den nyeste `.zip`-fil (f.eks. `WinRegistryTweaker_v1.0.zip`).
+3. Pak `.zip`-filen ud i en mappe efter eget valg – f.eks. `C:\Værktøjer\WinRegistryTweaker\`.
+4. Undgå at placere programmet i `C:\Program Files\`, fordi mappen kræver forhøjede rettigheder ved hver opdatering.
+
+**B. Byg programmet selv fra kildekode** – se afsnit 6.
+
+### 5.2 Første opstart – vigtigt
+1. Naviger til den mappe, hvor du udpakkede programmet.
+2. Højreklik på `WinRegistryTweaker.exe`.
+3. Vælg **"Kør som administrator"**.
+4. Windows viser en UAC-dialog (*"Vil du tillade, at denne app foretager ændringer på denne pc?"*). Klik **"Ja"**.
+5. Programmets hovedvindue åbnes.
 
 > [!WARNING]
-> Programmet **skal** køre som administrator. Hvis det startes uden forhøjede rettigheder, lukker det proaktivt ned med en advarsel for at forhindre delvise eller korrupte skrivninger.
+> **Vigtigt:** Hvis du starter programmet ved at dobbeltklikke på `.exe`-filen, vil Windows ikke give det administratorrettigheder – heller ikke selv om din brugerkonto er Administrator. Programmet vil derfor vise en fejlmeddelelse og afslutte sig selv. Dette er en bevidst sikkerhedsforanstaltning: Uden forhøjede rettigheder kan programmet ikke skrive til `HKEY_LOCAL_MACHINE`, og halvdelen af tweaksene ville fejle med *"Access Denied"*.
 
-1. Højreklik på `WinRegistryTweaker.exe`.
-2. Vælg **Kør som administrator**.
-3. Tryk **Ja** i Windows UAC-prompterne.
+### 5.3 Opret en genvej med administratorrettigheder (anbefalet)
+For at undgå at skulle højreklikke hver gang kan du oprette en genvej, der altid kører som administrator:
 
-*(Tip: Opret en genvej på skrivebordet, gå til **Egenskaber** → **Genvej** → **Avanceret...** og sæt flueben i **Kør som administrator**).*
+1. Højreklik på skrivebordet → **Ny** → **Genvej**.
+2. Angiv placeringen af `.exe`-filen, f.eks.:
+   ```text
+   C:\Værktøjer\WinRegistryTweaker\WinRegistryTweaker.exe
+   ```
+3. Klik **Næste**, giv genvejen et navn (f.eks. *"Registry Tweaker Pro"*), klik **Udfør**.
+4. Højreklik på den nye genvej → **Egenskaber** → fanen **Genvej** → knappen **Avanceret**.
+5. Sæt flueben i **"Kør som administrator"**, klik **OK** → **OK**.
+
+Herefter starter et dobbeltklik på genvejen programmet med de nødvendige rettigheder (Windows viser stadig UAC-bekræftelsen).
 
 ---
 
-## 🛡️ Sikkerhed og Ansvar
+## 6. Sådan bygger du projektet fra kildekode
 
-### Tag altid en sikkerhedskopi som det første!
-Inden du aktiverer eller ændrer indstillinger, bør du tage en fuld backup:
+### 6.1 Forudsætninger
+* **Lazarus IDE** version 2.2.6 eller nyere (anbefalet).
+* **Free Pascal Compiler** (FPC 3.2.2 eller nyere) – følger med Lazarus.
+* **Git** (valgfrit, men anbefalet til at hente kilden).
 
-1. Klik på **Filer** i menulinjen.
-2. Vælg **Gem fuld sikkerhedskopi af samtlige tweak-parametre...**.
-3. Vælg placering (filen navngives automatisk med dato og sekundpræcist tidsstempel, f.eks. `WinTweaker_Backup_2026-11-02_14-30-00.reg`).
+### 6.2 Trin for trin
+1. Klon repository'et:
+   ```bash
+   git clone https://github.com/DIT-BRUGERNAVN/WinRegistryTweaker.git
+   cd WinRegistryTweaker
+   ```
+2. Åbn projektet i Lazarus:
+   * Start Lazarus.
+   * Vælg **Fil** → **Åbn** og naviger til `WinRegistryTweaker.lpr`.
+   * Klik **Åbn**.
+3. Kontrollér projektindstillinger:
+   * Vælg **Projekt** → **Projektindstillinger**.
+   * Under **Compilerindstillinger** → **Mål**, vælg **Win64**.
+   * Under **Compilerindstillinger** → **Oversættelse**, sæt flueben i *"Byg med de samme indstillinger som Lazarus selv"* (anbefalet).
+4. Byg projektet:
+   * Vælg **Kør** → **Byg** (eller tryk <kbd>Shift</kbd>+<kbd>F9</kbd>).
+   * Hvis bygningen lykkes, findes `.exe`-filen i projektmappen (typisk `WinRegistryTweaker.exe`).
+5. Kør programmet:
+   * Vælg **Kør** → **Kør** (<kbd>F9</kbd>).
 
-Filen gemmes med officiel **UTF-16LE og Byte Order Mark (`$FEFF`)**. Du kan altid nulstille dit system ved blot at dobbeltklikke på denne fil i Windows Stifinder.
+Lazarus starter programmet med de nødvendige rettigheder, hvis Lazarus selv kører som administrator. Ellers start programmet manuelt som beskrevet i afsnit 5.2.
+
+### 6.3 Fejlfinding under bygning
+
+* `Fatal: Can't find unit Interfaces`  
+  Lazarus' LCL-pakke er ikke installeret korrekt. Geninstaller Lazarus med LCL-pakken.
+
+* `Fatal: Dette program understøtter udelukkende Microsoft Windows styresystemet`  
+  Du bygger på Linux/macOS. Skift til Windows, eller opsæt et krydskompileringsmiljø.
+
+* `Error: Identifier not found "TTokenInformationClass"`  
+  Forældet Free Pascal-version. Opdater til FPC 3.2.2 eller nyere.
+
+* `Error: resource compiler not found`  
+  `windres` mangler. Sørg for, at Lazarus' `fpc\bin`-mappe er i PATH.
+
+---
+
+## 7. Kørsel af programmet – med Administratorrettigheder
+
+### 7.1 Hvorfor kræver programmet Administratorrettigheder?
+Programmet ændrer indstillinger under både `HKEY_CURRENT_USER` og `HKEY_LOCAL_MACHINE`. Sidstnævnte er systemets globale konfigurationsdatabase, som kræver forhøjede rettigheder at skrive til. Programmet undersøger derfor ved opstart, om processen kører med et forhøjet token (via `OpenProcessToken` og `GetTokenInformation` med `TokenElevation`). Hvis ikke, vises en fejlmeddelelse, og programmet afslutter sig selv.
+
+### 7.2 De tre måder at starte programmet korrekt på
+1. **Højreklik-metoden (anbefalet til engangsbrug):**  
+   Højreklik på `WinRegistryTweaker.exe` → *"Kør som administrator"* → *"Ja"* i UAC-dialogen.
+2. **Genvejsmetoden (anbefalet til daglig brug):**  
+   Opret en genvej med *"Kør som administrator"* som beskrevet i afsnit 5.3.
+3. **Kommandolinje-metoden (til avancerede brugere):**  
+   Åbn en Kommandoprompt som administrator og skriv:
+   ```cmd
+   "C:\Værktøjer\WinRegistryTweaker\WinRegistryTweaker.exe"
+   ```
+
+### 7.3 Hvad sker der, hvis man starter uden Administratorrettigheder?
+Programmet viser følgende meddelelse og afslutter sig selv:
+
+```text
+Administratorrettigheder påkrævet
+Dette værktøj skal afvikles som Administrator for at kunne justere systemindstillinger.
+Højreklik på programmet og vælg "Kør som administrator".
+```
+
+Dette er en bevidst "fail-fast"-mekanisme: Det er bedre at stoppe med en klar besked end at lade brugeren klikke rundt i en brugerflade, hvor halvdelen af handlingerne alligevel ville fejle med *"Access Denied"*.
+
+---
+
+## 8. Sådan bruges programmet
+
+* **Trin 1 – Start programmet som Administrator**  
+  Se afsnit 7.
+* **Trin 2 – Tag en sikkerhedskopi (stærkt anbefalet)**  
+  Vælg **Filer** → **Gem fuld sikkerhedskopi...** og gem `.reg`-filen et sikkert sted – f.eks. på et USB-drev eller i skyen. Filen kan genskabe hele tilstanden, hvis noget går galt.
+* **Trin 3 – Gennemgå kategorierne**  
+  Klik gennem fanebladene, læs fordele og ulemper i infopanelet nederst, og sæt flueben ved de ønskede optimeringer. Eller brug *"Aktivér alle på denne fane"* for en hel kategori.
+* **Trin 4 – Anvend ændringerne**  
+  Ændringer skrives straks til registreringsdatabasen, når du klikker. Mange kræver dog en genstart for fuld effekt.
+* **Trin 5 – Genstart computeren**  
+  Vælg **Filer** → **Genstart Windows nu** (eller genstart manuelt), så indstillingerne træder i kraft.
+
+### Tips til daglig brug
+* **Brug musen eller tastaturet:** Hvert afkrydsningsfelt kan nås med <kbd>Tab</kbd>-tasten, og fordele/ulemper vises automatisk, når feltet får fokus.
+* Hold musen over et tweak for at læse den detaljerede beskrivelse i infopanelet.
+* Brug statuslinjen nederst til at følge med i, hvad programmet laver.
+* Tag en ny sikkerhedskopi, hver gang du har aktiveret en større batch ændringer.
+
+---
+
+## 9. Sikkerhed – læs dette før du begynder
+
+### 9.1 Programmet er ikke en "magisk optimeringsknap"
+Programmet ændrer systemkritiske indstillinger i Windows. Nogle tweaks påvirker sikkerheden, login-adfærd, netværksfunktioner eller hardwareadfærd. Derfor er det afgørende, at du:
+* Læser beskrivelserne i infopanelet, før du slår et tweak til.
+* Aktiverer tweaks gradvist – ikke alle 46 på én gang.
+* Tager en sikkerhedskopi før større ændringer.
+
+### 9.2 Hvad gør programmet for at beskytte dig?
+* **Alle ændringer kan rulles tilbage** – både enkeltvis, pr. fane og globalt.
+* **Fuld `.reg`-backup** med korrekt UTF-16LE-kodning og BOM, som kan importeres af Windows' egen regedit.
+* **Batch-bekræftelse:** *"Anvend alle"* kræver en eksplicit bekræftelse, fordi det ændrer login-adfærd.
+* **64-bit registeradgang** (`KEY_WOW64_64KEY`) forhindrer, at 32-bit og 64-bit visninger blandes sammen.
+* **Race condition-fri proceseksekvering:** `powercfg.exe` hentes altid fra den ægte `C:\Windows\System32` via `GetSafeSystemPath`, så et PATH-angreb forhindres.
+* **Event-guard** (`FUpdatingUI`) forhindrer uendelige rekursive kald mellem `CheckBoxClick`, `SetTweakInRegistry` og `ReadSingleTweakStatus`.
+* **Fejlhåndtering:** Hvis et tweak fejler, vises en præcis fejlmeddelelse, og brugerfladen ruller tilbage til den faktiske tilstand.
+
+### 9.3 Hvad programmet IKKE gør
+* Det gemmer ikke dine data eller sender dem til Microsoft eller tredjepart.
+* Det installerer ikke drivere eller baggrundstjenester.
+* Det ændrer ikke filer uden for registreringsdatabasen – bortset fra `powercfg -h off`, som sletter `C:\hiberfil.sys` (og dermed frigør diskplads).
+* Det kræver ikke internetadgang.
+
+### 9.4 Før du aktiverer sikkerhedshærdning
+Sikkerhedshærdningstweaksene (kategori 5 og 6) ændrer login- og systemadfærd:
+* **CTRL+ALT+DEL ved login** – du skal trykke denne kombination hver gang.
+* **Skjult seneste brugernavn** – du skal indtaste både brugernavn og adgangskode hver gang.
+* **Blokeret RDP** – du kan ikke fjernstyre computeren via Windows Fjernskrivebord.
+* **Blokeret USB-lager** – USB-stik og eksterne diske virker ikke (tastatur og mus påvirkes ikke).
+* **Tøm sidefilen ved nedlukning** – forlænger nedlukningstiden markant på maskiner med meget RAM.
+
+Hvis du er i tvivl, så slå disse tweaks til én ad gangen og test, at alt stadig virker, før du fortsætter.
+
+---
+
+## 10. Hvad gør man, hvis noget ikke virker efter tweaking?
+
+Selv om programmet er testet grundigt, kan visse tweaks have utilsigtede bivirkninger på den enkelte computer på grund af hardwareforskelle, driverversioner eller tredjepartssoftware. Her er en systematisk fremgangsmåde til at identificere og løse problemet.
+
+### 10.1 Generel fremgangsmåde (uanset symptom)
+
+1. **Identificér det seneste tweak**  
+   Hvis problemet opstod lige efter, du aktiverede en bestemt tweak eller en hel kategori, er det sandsynligvis den, der er årsagen. Tænk tilbage: Hvad aktiverede du, lige før problemet opstod?
+
+2. **Rul tilbage kategorivis**  
+   Gå til det relevante faneblad, og klik *"Gendan standard på denne fane"*. Dette ruller alle tweaks i den kategori tilbage til Windows' fabriksværdier – én handling, ingen manuel registerredigering.
+
+3. **Rul alt tilbage (sidste udvej)**  
+   Hvis du ikke kan identificere årsagen, og problemet er alvorligt, kan du rulle alle 46 tweaks tilbage:
+   * Gå til hvert faneblad og klik *"Gendan standard"*, eller
+   * Importér den `.reg`-backup, du tog i trin 2 ovenfor (dobbeltklik filen i Stifinder).
+
+4. **Genstart computeren**  
+   Mange tweaks ændrer kerneadfærd og kræver genstart for at blive fuldt tilbagerullet. Genstart maskinen, før du konkluderer, at problemet varer ved.
+
+5. **Brug en hvilepunkt-genopretning**  
+   Hvis intet andet virker, kan du bruge Windows' indbyggede Systemgendannelse (<kbd>Win</kbd> + <kbd>R</kbd> → `rstrui.exe`). Vælg et gendannelsespunkt fra før tweakingen.
+
+---
+
+## 11. Konkrete symptomer og løsninger
+
+### 11.1 USB-drev kan ikke tilgås efter tweaking
+* **Årsag:** Tweaket *"Forhindr uautoriseret USB-lageradgang (USBSTOR)"* i kategorien *"Sikkerhed & Privatliv"* sætter USBSTOR-tjenesten til `Start=4` (deaktiveret). Dette blokerer alle USB-lagerenheder (USB-stik, eksterne diske, kortlæsere) – men påvirker ikke USB-tastatur og USB-mus.
+* **Løsning:**
+  1. Åbn fanebladet **"2. Sikkerhed & Privatliv"**.
+  2. Fjern fluebenet ud for *"Forhindr uautoriseret USB-lageradgang"*.
+  3. Genstart computeren (vigtigt! USBSTOR-tjenesten skal genstartes).
+  4. USB-drevet er nu tilgængeligt igen.
+* **Hvis det stadig ikke virker:**
+  1. Åbn PowerShell som administrator.
+  2. Kør: `Get-Service USBSTOR`
+  3. Status skal vise `Stopped` (hvilket er normalt, indtil et drev tilsluttes), og `StartType` skal være `Manual` eller `Automatic`.
+  4. Hvis `StartType` stadig er `Disabled`, kør:
+     ```powershell
+     Set-Service USBSTOR -StartupType Manual
+     ```
+  5. Alternativt: Åbn `regedit` → gå til `HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\USBSTOR` og sæt `Start` til `3` (Manual).
+
+### 11.2 Kan ikke logge ind på Windows efter tweaking
+* **Årsag:** Tweaket *"Tving sikker CTRL+ALT+DEL ved login"* eller *"Fjern senest loggede brugernavn på låseskærm"* kan ændre login-adfærden. I sjældne tilfælde kan en forkert kombination af sikkerhedspolitikker blokere normal pålogning.
+* **Løsning (fra en anden konto eller via Sikker Tilstand):**
+  1. Genstart i Sikker Tilstand (hold <kbd>Shift</kbd> nede under genstart, eller tryk <kbd>F8</kbd> under opstart).
+  2. Log ind med en administratorkonto.
+  3. Åbn programmet (kør som administrator).
+  4. Gå til fanebladet **"5. Sikkerhedshærdning (Del 1)"** og rul alle tweaks tilbage.
+  5. Genstart normalt.
+* **Hvis ingen konto virker:**  
+  Brug en Windows-installations-USB til at åbne Kommandoprompten via *"Reparer computeren → Fejlfinding → Kommandoprompt"* og gendan registreringsdatabasen fra en backup, eller brug Systemgendannelse.
+
+### 11.3 Programmet starter ikke (adgangsfejl ved opstart)
+* **Årsag:** Manglende administratorrettigheder, eller UAC er blevet ændret af en tweak.
+* **Løsning:**
+  1. Højreklik på `.exe`-filen og vælg *"Kør som administrator"*.
+  2. Hvis dette ikke virker, er UAC måske blevet deaktiveret. Åbn Kontrolpanel → Brugerkonti → Skift indstillinger for Brugerkonti, og sæt skyderen tilbage til standard (næstøverste niveau). Genstart.
+
+### 11.4 Netværket virker ikke (ingen internetforbindelse)
+* **Årsag:** Tweaket *"TcpTimedWaitDelay"* eller *"Deaktiver QoS-båndbreddereservation"* kan i sjældne tilfælde påvirke netværket på specifikke hardwarekonfigurationer.
+* **Løsning:**
+  1. Åbn fanebladet **"4. Netværk & Gaming"**.
+  2. Klik *"Gendan standard på denne fane"*.
+  3. Genstart computeren.
+  4. Hvis problemet varer ved, kontrollér netværksdriveren i Enhedshåndtering (der kan være behov for en opdatering).
+
+### 11.5 Spil kører dårligere efter tweaking
+* **Årsag:** Nogle GPU-tweaks (f.eks. HAGS) kan give micro-stuttering på ældre drivere. Ligeledes kan `Win32PrioritySeparation` påvirke baggrundsprocesser, som nogle spil afhænger af.
+* **Løsning:**
+  1. Åbn fanebladet **"8. Avanceret Kerne & GPU"**.
+  2. Rul HAGS-tweaket tilbage (fjern fluebenet).
+  3. Åbn fanebladet **"3. System & Ydeevne"**.
+  4. Rul `Win32PrioritySeparation` tilbage.
+  5. Genstart computeren.
+
+### 11.6 Windows bliver meget langsom ved nedlukning
+* **Årsag:** Tweaket *"Tøm sidefilen (Pagefile) ved nedlukning"* forlænger nedlukningstiden betydeligt på computere med meget RAM, fordi hele sidefilen (typisk 4–16 GB) skal overskrives.
+* **Løsning:**
+  1. Åbn fanebladet **"5. Sikkerhedshærdning (Del 1)"**.
+  2. Fjern fluebenet ud for *"Tøm sidefilen (Pagefile) ved nedlukning"*.
+  3. Genstart computeren.
+  4. *Bemærk:* Dette tweak er kun relevant, hvis du har behov for at beskytte følsomme data mod fysisk udlæsning af disken.
+
+### 11.7 Dvalefunktionen virker ikke mere
+* **Årsag:** Tweaket *"Slå dvale fra (Sletter hiberfil.sys via powercfg)"* har deaktiveret dvale og Hurtig Start (Fast Startup).
+* **Løsning:**
+  1. Åbn fanebladet **"3. System & Ydeevne"**.
+  2. Fjern fluebenet ud for *"Slå dvale fra"*.
+  3. Genstart computeren.
+  4. `hiberfil.sys` genskabes automatisk af powercfg ved genstart.
+
+### 11.8 Windows opfører sig underligt efter "Anvend alle"
+* **Årsag:** *"Anvend alle"* aktiverer alle 46 tweaks – inklusive sikkerhedshærdning, der ændrer login-adfærd, blokerer USB-lager og deaktiverer telemetri. Hvis du ikke har læst beskrivelserne, kan nogle af ændringerne virke overraskende.
+* **Løsning:**
+  1. Brug *"Gendan standard"* på hvert faneblad, eller importér din `.reg`-backup.
+  2. Genstart computeren.
+  3. Aktiver herefter tweaks gradvist – én kategori ad gangen – så du kan identificere eventuelle bivirkninger.
+
+---
+
+## 12. Nødhjælp – hvis intet virker
+
+### 12.1 Start i Sikker Tilstand
+Hold <kbd>Shift</kbd> nede under genstart, eller tryk <kbd>F8</kbd> under opstart. Dette indlæser Windows med minimale drivere, så du kan tilgå programmet og rulle tweaks tilbage.
+
+### 12.2 Brug .reg-backup
+Dobbeltklik på den `.reg`-fil, du gemte i trin 2 ovenfor. Windows importerer den automatisk og genskaber den gemte tilstand. Husk at genstarte bagefter.
+
+### 12.3 Systemgendannelse
+Tryk <kbd>Win</kbd> + <kbd>R</kbd> → `rstrui.exe`. Vælg et gendannelsespunkt fra før tweakingen. Dette ruller hele systemet tilbage (ikke kun registreringsdatabasen).
+
+### 12.4 Windows-reparationsmiljø
+Hvis Windows ikke kan starte, kan du bruge en Windows-installations-USB: *"Reparer computeren → Fejlfinding → Kommandoprompt"*. Her kan du køre:
+```cmd
+sfc /scannow
+DISM /Online /Cleanup-Image /RestoreHealth
+```
+eller importere `.reg`-filen via:
+```cmd
+reg import <filnavn>.reg
+```
+
+### 12.5 Sidste udvej – ny installation
+Hvis ingen af ovenstående virker (yderst sjældent), kan en *"Nulstil denne pc"* fra **Indstillinger** → **System** → **Gendannelse** genskabe Windows. Vælg *"Behold mine filer"* for at undgå datatab.
+
+---
+
+## 13. Sådan undgår du problemer fremover
+
+* **Tag altid en backup**, før du aktiverer mange tweaks på én gang.
+* **Aktivér tweaks gradvist**, så du kan identificere årsagen, hvis noget går galt (i stedet for at slå alle 46 til på én gang).
+* **Læs beskrivelserne i infopanelet** – de advarer om kendte risici.
+* **Brug "Anvend alle" med forsigtighed** – den aktiverer alle tweaks, inklusive sikkerhedshærdning, der ændrer login-adfærd.
+* **Hold styr på, hvad du aktiverer** – noter eventuelt, hvilke tweaks du slår til, så du senere kan rulle dem tilbage, hvis problemer opstår.
+* **Test på en ikke-produktionsmaskine først**, hvis du administrerer flere computere.
+
+---
+
+## 14. Teknisk arkitektur
+
+### 14.1 Overordnet struktur
+* `WinRegistryTweaker.lpr` – Programmets indgangspunkt. Initialiserer Application, opretter FormMain og starter event-loopet.
+* `uMain.pas` – Hjertet i programmet. Indeholder al forretningslogik, UI-generering, registeradgang, backup, genstart og fejlhåndtering.
+* `uMain.lfm` – Lazarus' designfil for hovedvinduet (layout, komponenter, egenskaber).
+* `uHelp.pas` – Hjælpeenheden med det udvidede hjælpevindue.
+* `uHelp.lfm` – Designfil for hjælpevinduet.
+* `WinRegistryTweaker.res` – Ressourcefil med ikon, versionsinformation og UAC-manifest.
+
+### 14.2 Centrale dele af uMain.pas
+* **Token-baseret kontrol af administratorrettigheder (`IsProcessElevated`)** – undersøger via `OpenProcessToken` og `GetTokenInformation` med `TokenElevation`, om processen kører med forhøjede rettigheder.
+* **Dynamisk opbygning af faneblade med parametre (`PopulateAllTweaks`, `BuildUI`)** – genererer hele brugerfladen ud fra `TTweakItem`-listen `FTweaks`. Tilføjer man et nyt tweak til listen, dukker det automatisk op på det korrekte faneblad.
+* **Læsning og skrivning i 64-bit Windows Registry (`ReadSingleTweakStatus`, `SetTweakInRegistry`)** – anvender altid `KEY_WOW64_64KEY`, validerer datatyper (`rdInteger`, `rdBinary`, `rdString`, `rdExpandString`) og håndterer både ægte DWORD-værdier og binært lagrede DWORD.
+* **Processtyring mod System32 med timeout og pipe-tømning (`RunCommandCapture`, `GetSafeSystemPath`)** – afvikler eksterne værktøjer (`powercfg.exe`) usynligt med 30-sekunders timeout og fuld opsamling af stdout+stderr.
+* **Eksport af fuld UTF-16LE .reg-sikkerhedskopi med BOM (`MenuCreateBackupClick`)** – genererer en komplet `.reg`-fil med korrekt UTF-16LE-kodning og BOM (`$FEFF`), så regedit kan importere den.
+* **Rettighedstildeling (`SeShutdownPrivilege`) og genstart af pc (`RestartComputer`)** – erhverver `SeShutdownPrivilege` via `OpenProcessToken`, `LookupPrivilegeValue` og `AdjustTokenPrivileges`, før den kalder `ExitWindowsEx` med `EWX_REBOOT`, `EWX_FORCEIFHUNG` og en planlagt årsagskode.
+* **Åbning af det udvidede hjælpevindue (`MenuUserGuideClick`)** – opretter `FormHelp` ved første klik og bringer vinduet i forgrunden ved efterfølgende klik.
+* **Event-guarding (`FUpdatingUI`)** – beskytter mod, at programmatiske opdateringer af `CheckBox.Checked` udløser `OnClick` og dermed skaber uendelige rekursive kald.
+
+### 14.3 Datamodel
+Hvert tweak repræsenteres af et `TTweakItem`-objekt med følgende felter:
+
+* `CategoryIndex` – Hvilket faneblad (0–9) tweaket hører til.
+* `Title` – Den synlige overskrift ud for afkrydsningsfeltet.
+* `RootKey` – `HKEY_CURRENT_USER` eller `HKEY_LOCAL_MACHINE`.
+* `SubKey` – Mappestien i registreringsdatabasen.
+* `ValueName` – Parameterens navn.
+* `ValKind` – `vkDWord`, `vkString`, `vkEmptyKey` eller `vkHibernate`.
+* `OptimizedDWord` / `OptimizedStr` – Den optimerede værdi.
+* `DefaultDWord` / `DefaultStr` – Fabriksstandardværdien.
+* `DeleteKeyPath` – Sti der skal slettes rekursivt ved tilbagerulning (`vkEmptyKey`).
+* `Pros` / `Cons` – Forklarende fordele og ulemper.
+* `CheckBox` – Reference til det visuelle afkrydsningsfelt.
+
+### 14.4 De fire tweak-typer
+* **vkDWord**  
+  Eksempel: `AllowTelemetry = 0`. Skrives som `REG_DWORD` via `Reg.WriteInteger`.
+* **vkString**  
+  Eksempel: `MenuShowDelay = "20"`. Skrives som `REG_SZ` via `Reg.WriteString`.
+* **vkEmptyKey**  
+  Eksempel: Win11-kontekstmenu. Nøglens eksistens er tweaket; slettes rekursivt via `DeleteKeyTree`.
+* **vkHibernate**  
+  Eksempel: Dvale. Styres via `powercfg.exe -h off/on` – ikke via registret.
+
+---
+
+## 15. Fejlfinding under bygning
+
+### 15.1 Kompileringsadvarsler
+Programmet undertrykker bevidst følgende advarsler for en ren byggeproces:
+* `WARN 4055` – typekonvertering mellem pointere og ordinals på 64-bit.
+* `WARN 5024` – ubrugte parametre (f.eks. `_Shift`, `_X`, `_Y` i `CheckBoxMouseMove`).
+* `WARN 5057` – lokale variable, der ikke synes initialiseret.
+* `WARN 6018` – implicit strengtypekonvertering med potentielt datatab.
+
+Disse advarsler er ikke fejl, og de påvirker ikke programmets funktion.
+
+### 15.2 Platformtjek
+`uMain.pas` indeholder en `{$IFNDEF MSWINDOWS}`-blok, der stopper kompileringen med en FATAL-fejl, hvis man forsøger at bygge på et ikke-Windows-styresystem. Dette er bevidst: Programmet bruger Windows-specifikke API-kald (`OpenProcessToken`, `ExitWindowsEx`, `GetSystemDirectory`), som ikke findes på Linux eller macOS.
+
+### 15.3 UAC-manifest
+`WinRegistryTweaker.res` indeholder et UAC-manifest, der beder Windows om administratorrettigheder ved opstart. Hvis manifestet mangler, vil Windows ikke vise UAC-dialogen, og programmet vil starte uden forhøjede rettigheder – hvilket får det til at afvise at køre. Sørg derfor for, at `.res`-filen er inkluderet i bygningen.
+
+---
+
+## 16. Bidrag og licens
+
+### 16.1 Licens
+Dette projekt er udgivet under **MIT-licensen**. Se `LICENSE`-filen for detaljer. Du må frit bruge, ændre og distribuere programmet – også kommercielt – så længe ophavsretsmeddelelsen bevares.
+
+### 16.2 Bidrag
+Bidrag er velkomne! Hvis du finder en fejl eller har en idé til en forbedring:
+1. Opret et issue på GitHub med en klar beskrivelse af problemet eller forslaget.
+2. Indsend en pull request med din ændring. Sørg for, at:
+   * Koden følger Free Pascal's stilguide.
+   * Nye tweaks tilføjes til `PopulateAllTweaks` med præcise fordele/ulemper.
+   * Ændringer i brugerfladen respekterer høj DPI og tastaturnavigation.
+   * Der tages højde for både `HKEY_CURRENT_USER` og `HKEY_LOCAL_MACHINE`.
+   * Fejlhåndtering følger programmets eksisterende mønstre (`try/except`, `FUpdatingUI`-guard).
+
+### 16.3 Kontakt
+Spørgsmål, ros eller kritik kan rettes til projektets issue-tracker på GitHub.
+
+<div align="center">
+
+**God fornøjelse med Windows Registry Tweaker Pro – og husk altid at tage en sikkerhedskopi, før du begynder at tweake! 🚀**
+
+[Til toppen](#-windows-registry-tweaker-pro)
+
+</div>
+```
