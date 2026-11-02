@@ -563,6 +563,12 @@ Bidrag er velkomne! Hvis du finder en fejl eller har en idé til en forbedring:
 ### 16.3 Kontakt
 Spørgsmål, ros eller kritik kan rettes til projektets issue-tracker på GitHub.
 
+### 17 Anvendelse
+Udover at anvende programmet som det det er: Et Windows 10/11 Tweaker værktøj, så kan det også bruges
+til at lære Objekt Pascal/Free Pascal/Lazarus.
+Den ekstremt høje dokumentationsgrad gør at man ved hvad alle dele af koden laver og hvorfor.
+Noget man som begynder kan lære utroligt meget af ift at lære sig Objekt Pascal/Free Pascal/Lazarus.
+
 <div align="center">
 
 **God fornøjelse med Windows Registry Tweaker Pro – og husk altid at tage en sikkerhedskopi, før du begynder at tweake! 🚀**
