@@ -1,0 +1,1121 @@
+🚀 1. Optimering og Effektivitet (Hurtigere Windows)
+Hurtigere lukning af apps ved shutdown
+
+Sti: HKEY_CURRENT_USER\Control Panel\Desktop
+
+Strengværdi: WaitToKillAppTimeout = 2000 (standard: 5000+)
+
+Fordele: Windows venter kortere tid på, at hængende programmer lukker ned selv, hvilket gør, at computeren slukker hurtigere.
+
+Ulemper: Programmer, der er langsomme om at gemme data ved nedlukning, risikerer at blive lukket hårdt, hvilket kan føre til tab af ugemt arbejde.
+
+Reducer ventetid på menuer
+
+Sti: HKEY_CURRENT_USER\Control Panel\Desktop
+
+Strengværdi: MenuShowDelay = 0 (eller 20)
+
+Fordele: Menuer, højrekliksmenuer og pop-ups åbner med det samme uden den indbyggede forsinkelse, hvilket giver en mere responsiv brugerflade.
+
+Ulemper: Kan virke en smule hæsblæsende eller "hakkende" for øjet, hvis man foretrækker Windows' bløde, animerede overgange.
+
+Afslut fastlåste opgaver automatisk
+
+Sti: HKEY_CURRENT_USER\Control Panel\Desktop
+
+Strengværdi: AutoEndTasks = 1
+
+Fordele: Du slipper for den irriterende dialogboks, der spørger, om du vil afslutte et program, der ikke svarer, når du slukker computeren.
+
+Ulemper: Øger risikoen for at miste ugemt data i programmer, der blot er midlertidigt optaget af en tung beregning.
+
+Hurtigere genstart af Windows Stifinder (Explorer)
+
+Sti: HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced
+
+DWORD (32-bit): SeparateProcess = 1
+
+Fordele: Kører Stifinder i en separat proces, hvilket forhindrer, at hele skrivebordet og proceslinjen styrter ned, hvis en enkelt mappe- eller stifinder-proces crasher.
+
+Ulemper: Forbruger en anelse mere RAM og systemressourcer ved at køre processen adskilt.
+
+Deaktiver unødvendig netværks-throttling (Til gaming/streaming)
+
+Sti: HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile
+
+DWORD (32-bit): NetworkThrottlingIndex = ffffffff (hexadecimal)
+
+Fordele: Fjerner Windows' automatiske begrænsning af netværksbåndbredde for ikke-multimedie-programmer, hvilket sikrer fuld skrue på netværket til spil og streaming.
+
+Ulemper: Kan i sjældne tilfælde give færre ressourcer til baggrundstjenester (som f.eks. Windows Update eller filsynkronisering), mens du spiller.
+
+🛡️ 2. Sikkerhed og Privatliv
+Deaktiver Windows Telemetri (Dataindsamling)
+
+Sti: HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\DataCollection
+
+DWORD (32-bit): AllowTelemetry = 0
+
+Fordele: Stopper Windows i at sende diagnosticerings- og brugsdata til Microsoft, hvilket forbedrer privatlivets fred og sparer lidt netværksbandbredde.
+
+Ulemper: Gør det sværere for Microsoft at opdage og udsende automatiske fejlrettelser til specifikke hardware-relaterede bugs på din maskine.
+
+Forhindr uautoriseret USB-adgang (USB Storage)
+
+Sti: HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\USBSTOR
+
+DWORD (32-bit): Start = 4 (standard: 3)
+
+Fordele: Blokerer fuldstændigt for brugen af USB-lagermedia, hvilket forhindrer datatyveri og spredning af malware via fremmede USB-nøgler.
+
+Ulemper: Du kan ikke selv bruge USB-nøgler eller eksterne USB-harddiske, før værdien ændres tilbage igen. (Mus og tastatur via USB påvirkes ikke).
+
+Deaktiver fjernstyring af registreringsdatabasen
+
+Sti: HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\RemoteRegistry
+
+DWORD (32-bit): Start = 4 (Deaktiveret)
+
+Fordele: Forhindrer udefrakommende eller netværksbrugere i at fjernredigere din registreringsdatabase, hvilket lukker et potentielt kritisk sikkerhedshul.
+
+Ulemper: Netværksadministratorer eller centrale administrationsværktøjer kan ikke fjernfejlrette systemet via Remote Registry.
+
+Slå "AutoRun" / "AutoPlay" helt fra
+
+Sti: HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer
+
+DWORD (32-bit): NoDriveTypeAutoRun = 255 (hexadecimal)
+
+Fordele: Stopper CD'er, USB-stik og eksterne drev i automatisk at eksekvere indhold eller scripts, når de tilsluttes. Beskytter effektivt mod autorun-baseret malware.
+
+Ulemper: Du skal selv manuelt åbne medier i Stifinder, hver gang du tilslutter dem.
+
+Deaktiver Cortana på låseskærmen
+
+Sti: HKEY_CURRENT_USER\SOFTWARE\Microsoft\Speech_OneCore\Preferences
+
+DWORD (32-bit): VoiceActivationEnableAboveLockscreen = 0
+
+Fordele: Forhindrer forbipasserende i at bruge stemmekommandoer til at interagere med computeren, mens den er låst.
+
+Ulemper: Du kan ikke bruge stemmestyring, før du har logget ind manuelt.
+
+Fjern "Sidst loggede ind" brugernavn på låseskærmen
+
+Sti: HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System
+
+DWORD (32-bit): DontDisplayLastUserName = 1
+
+Fordele: Skjuler navnet på den sidst ankomne bruger på login-skærmen, så udefrakommende selv skal kende brugernavnet for at logge ind.
+
+Ulemper: Gør den daglige login-proces en lille smule mere besværlig, da du selv skal indtaste både brugernavn og adgangskode hver gang.
+
+⚙️ 3. System og Ydeevne (15 ting)
+Slå dvale (Hibernation) fra
+
+Sti: HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Power
+
+DWORD: HibernateEnabled = 0
+
+Fordele: Sletter filen hiberfil.sys på C-drevet, hvilket øjeblikkeligt frigiver flere gigabyte diskplads (svarende til størrelsen på din RAM).
+
+Ulemper: Du mister muligheden for at bruge "Dvale"-funktionen.
+
+Deaktiver Prefetcher (Kun til SSD)
+
+Sti: HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management\PrefetchParameters
+
+DWORD: EnablePrefetcher = 0
+
+Fordele: Reducerer unødvendige læse- og skrivehandlinger på moderne SSD-diske, hvilket skåner diskens levetid.
+
+Ulemper: Kan gøre opstart af visse ældre, ikke-optimerede programmer en smule langsommere første gang, de åbnes efter boot.
+
+Deaktiver SuperFetch/SysMain (Kun til SSD)
+
+Sti: HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management\PrefetchParameters
+
+DWORD: EnableSuperfetch = 0
+
+Fordele: Forhindrer Windows i konstant at præ-indlæse programmer i RAM, hvilket sparer diskaktivitet og RAM-ressourcer på SSD-baserede systemer.
+
+Ulemper: Programmer, du bruger ofte, starter måske ikke helt så lynhurtigt op, da de ikke længere er forhåndscachet i hukommelsen.
+
+Forøg prioritet for aktive programmer
+
+Sti: HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\PriorityControl
+
+DWORD: Win32PrioritySeparation = 38 (decimal)
+
+Fordele: Giver det vindue, du arbejder i (forgrunden), en større del af CPU-kraften, hvilket kan give mere jævn ydeevne i det aktive program eller spil.
+
+Ulemper: Baggrundsprocesser (som f.eks. filkopiering eller virusscanning) kan tage længere tid at fuldføre.
+
+Slå Virtualiseringbaseret Sikkerhed (VBS) fra
+
+Sti: HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\DeviceGuard
+
+DWORD: EnableVirtualizationBasedSecurity = 0
+
+Fordele: Kan give mellem 5% og 15% bedre billedhastighed (FPS) i krævende spil ved at fjerne virtualiserings-overhead.
+
+Ulemper: Sænker systemets indbyggede isolering af kerne-sikkerhed (Core Isolation), hvilket gør maskinen mere sårbar over for avancerede angreb.
+
+Tving Windows til at beholde kernen i RAM
+
+Sti: HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management
+
+DWORD: DisablePagingExecutive = 1
+
+Fordele: Forhindrer Windows i at skrive kerne-systemfiler til sidefilen på harddisken, hvilket giver et mere stabilt og responsivt system på pc'er med rigeligt med RAM.
+
+Ulemper: Kræver minimum 16 GB RAM; ellers risikerer du at løbe tør for fysisk hukommelse.
+
+Slå NTFS fil-adgangsstempler fra
+
+Sti: HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\FileSystem
+
+DWORD: NtfsDisableLastAccessUpdate = 1
+
+Fordele: Stopper Windows i konstant at opdatere tidsstemplet for, hvornår filer sidst blev åbnet, hvilket mindsker diskforbruget.
+
+Ulemper: Programmer eller backup-værktøjer, der sorterer eller arbejder ud fra "sidst set/åbnet"-datoer, vil ikke længere kunne se det præcise tidspunkt.
+
+Stop søgninger i at bruge unødvendig CPU (Netværksdrev)
+
+Sti: HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Windows Search
+
+DWORD: PreventIndexingNetworkDrive = 1
+
+Fordele: Forhindrer Windows i at spilde CPU-kraft og netværksbåndbredde på at indeksere filer på eksterne netværksdrev.
+
+Ulemper: Søgning efter filer direkte på netværksdrev via Windows Stifinder kan tage længere tid.
+
+Hurtigere crash-dump-håndtering
+
+Sti: HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\CrashControl
+
+DWORD: AutoReboot = 1
+
+Fordele: Sørger for, at computeren automatisk genstarter med det samme, hvis den crasher (Blue Screen), i stedet for at hænge fast.
+
+Ulemper: Gør det sværere at nå at aflæse fejlkoden (stop-koden) på skærmen, hvis du skal fejlsøge et hardwareproblem.
+
+Fjern animationer ved maksimering/minimering
+
+Sti: HKEY_CURRENT_USER\Control Panel\Desktop\WindowMetrics
+
+Streng: MinAnimate = 0
+
+Fordele: Vinduernes overgange fjernes, så de åbner og lukker øjeblikkeligt, hvilket føles hurtigere på svagere hardware.
+
+Ulemper: Mister de visuelle overgange, hvilket kan virke lidt mere kantet for øjet.
+
+Reducer svartid for hængende tjenester
+
+Sti: HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control
+
+Streng: WaitToKillServiceTimeout = 2000
+
+Fordele: Forkorter den tid, Windows venter på, at baggrundstjenester lukker ned under nedlukning.
+
+Ulemper: Baggrundstjenester, der er længe om at gemme tilstande, kan blive tvunget ned før tid.
+
+Deaktiver unødvendige startfejl-logs
+
+Sti: HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager
+
+DWORD: BootExecute = (Tøm værdi)
+
+Fordele: Stopper unødvendig skrivning af logfiler ved mindre, harmløse startfejl.
+
+Ulemper: Gør det sværere at fejlsøge ved egentlige boot-problemer.
+
+Optimer I/O-bufferstørrelse
+
+Sti: HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management
+
+DWORD: IoPageLockLimit = 983040 (decimal, ca. 960MB)
+
+Fordele: Øger mængden af data, Windows kan overføre i hukommelsen på én gang, hvilket accelererer store filoverførsler.
+
+Ulemper: Beslaglægger en fast del af hukommelsen til cache, hvilket kan mindske den tilgængelige RAM til andre programmer.
+
+Deaktiver hardware-acceleration på Windows-menuer
+
+Sti: HKEY_CURRENT_USER\Software\Microsoft\Avalon.Graphics
+
+DWORD: DisableHWAcceleration = 1
+
+Fordele: Sparer ressourcer på grafikkortet ved at lade CPU'en klare enkle UI-opgaver.
+
+Ulemper: Kan give en langsommere oplevelse i visse WPF-baserede programmer, hvis grafikkortet ellers er stærkt nok.
+
+Deaktiver Aeroshake
+
+Sti: HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced
+
+DWORD: DisallowShaking = 1
+
+Fordele: Forhindrer, at alle andre vinduer minimeres, hvis du ryster et vindue med musen.
+
+Ulemper: Du mister den hurtige "ryst-væk"-funktion til at rydde skrivebordet.
+
+🌐 4. Netværk og Gaming-optimering (10 ting)
+Deaktiver Nagle's Algoritme (TCP Ack Frequency)
+
+Sti: HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters\Interfaces\[Dit-Netværkskort-ID]
+
+DWORD: TcpAckFrequency = 1
+
+Fordele: Sender netværkspakker prompte uden at samle dem i batches, hvilket reducerer ping og latens i spil.
+
+Ulemper: Øger mængden af netværkspakker (overhead), hvilket kan belaste ældre netværksforbindelser.
+
+Deaktiver TCP No Delay
+
+Sti: HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters\Interfaces\[Dit-Netværkskort-ID]
+
+DWORD: TCPNoDelay = 1
+
+Fordele: Arbejder sammen med ovenstående for at fjerne forsinkelser i realtidsdata (spil og VoIP).
+
+Ulemper: Lidt højere båndbreddeforbrug grundet flere små pakker.
+
+Deaktiver Large Send Offload (LSO)
+
+Sti: HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\NDIS\Parameters
+
+DWORD: MaxNumRssCpus = 4 (eller antal kerner)
+
+Fordele: Forhindrer netværkskortet i at overbelaste sig selv med store pakker, hvilket fjerner lagspikes.
+
+Ulemper: Kræver præcis indstilling efter antallet af fysiske CPU-kerner; ellers kan det have modsat effekt.
+
+Optimer DNS-cache-tid
+
+Sti: HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Dnscache\Parameters
+
+DWORD: MaxCacheTtl = 86400
+
+Fordele: Tvinger Windows til at håndtere DNS-adresser mere effektivt, så fejlbehæftede sider ikke hænger fast.
+
+Ulemper: For lang cache-tid kan betyde midlertidig utilgængelighed, hvis en hjemmeside skifter IP-adresse.
+
+Prioriter netværkstrafik til spil
+
+Sti: HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\Tasks\Games
+
+DWORD: GPU Priority = 8 og Priority = 6
+
+Fordele: Giver spil og realtidskommunikation førsteprioritet over Windows Updates og baggrundsoverførsler.
+
+Ulemper: Baggrundsdownloads (f.eks. Steam-opdateringer) går langsommere, mens du spiller.
+
+Deaktiver NetBIOS over TCP/IP
+
+Sti: HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\NetBT\Parameters\Interfaces\[Dit-Netværkskort-ID]
+
+DWORD: NetbiosOptions = 2
+
+Fordele: Lukker en sårbar og forældet netværksprotokol, der ofte udnyttes af hackere på lokale netværk (LAN).
+
+Ulemper: Gør det umuligt at finde ældre netværksenheder eller bruge ældre fildelingsmetoder.
+
+Forøg maks TCP-forbindelser
+
+Sti: HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Internet Settings
+
+DWORD: MaxConnectionsPerServer = 16
+
+Fordele: Gør det muligt for browsere at hente flere elementer fra en hjemmeside samtidigt, hvilket øger indlæsningshastigheden.
+
+Ulemper: Kan virke aggressivt på visse webservere, der begrænser samtidige forbindelser pr. IP.
+
+Tving hurtigere afslutning af døde TCP-forbindelser
+
+Sti: HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters
+
+DWORD: TcpTimedWaitDelay = 30
+
+Fordele: Frigiver netværksporte hurtigere, når forbindelsen til en server tabes.
+
+Ulemper: Aggressive værdier kan skabe problemer for programmer, der kræver, at forbindelsen holdes åben længere.
+
+Slå netværks-autotuning fra (ved ustabilt internet)
+
+Sti: HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters
+
+DWORD: Tcp1323Opts = 1
+
+Fordele: Kan stabilisere forbindelsen på ældre routere eller problematiske bredbåndsforbindelser.
+
+Ulemper: Reducerer det maksimale båndbreddeudbytte på meget hurtige fiberforbindelser.
+
+Deaktiver båndbredde-reservation til QoS
+
+Sti: HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Psched
+
+DWORD: NonBestEffortLimit = 0
+
+Fordele: Frigiver de op til 20% af båndbredden, som Windows ellers reserverer til systemtjenester.
+
+Ulemper: Systemets egne netværksopgaver har ikke længere garanteret båndbredde ved ekstrem overbelastning.
+
+🔒 5. Udvidet Sikkerhed og Hardcore Hærdning (30 ting samlet)
+(Dette dækker både "Udvidet Sikkerhed" og "Hardcore Sikkerhed og System-hærdning" fra din oprindelige opdeling).
+
+Skærp brugerkontokontrol (UAC) til maksimal beskyttelse
+
+Sti: HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System
+
+DWORD: ConsentPromptBehaviorAdmin = 2
+
+Fordele: Tvinger skrivebordet til at dæmpe sig (Secure Desktop) og kræver altid aktiv bekræftelse ved systemændringer.
+
+Ulemper: Kan virke irriterende, da skærmen bliver grå og kræver godkendelse meget hyppigt.
+
+Deaktiver Windows Script Host (WSH)
+
+Sti: HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows Script Host\Settings
+
+DWORD: Enabled = 0
+
+Fordele: Forhindrer .vbs og .js scripts i at køre automatisk (effektivt værn mod ransomware via e-mail).
+
+Ulemper: Scripts, som du selv eller din arbejdsplads bruger til automation, holder op med at virke.
+
+Forhindr installation af usignerede drivere
+
+Sti: HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows NT\Driver Signing
+
+DWORD: BehaviorOnFailedVerify = 2
+
+Fordele: Stopper ondsindet hardware-software i at integrere sig i Windows-kernen.
+
+Ulemper: Umuliggør installation af ældre eller hjemmelavede drivere uden officielt Microsoft WHQL-certifikat.
+
+Bloker eksekvering af filer fra midlertidige mapper (Appdata/Temp)
+
+Sti: HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Safer\CodeIdentifiers
+
+DWORD: AuthenticodeEnabled = 0
+
+Fordele: Stopper mange typer malware, der forsøger at køre skjult direkte fra midlertidige mapper.
+
+Ulemper: Visse lovlige programmer, der kører fra AppData, kan blive blokeret.
+
+Deaktiver fjernassistance (Remote Assistance)
+
+Sti: HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Remote Assistance
+
+DWORD: fAllowToGetHelp = 0
+
+Fordele: Lukker for muligheden for, at udefrakommende kan anmode om at styre din skærm via Windows' indbyggede værktøj.
+
+Ulemper: Du kan ikke modtage fjernsupport via denne specifikke indbyggede metode.
+
+Tving sikker CTRL+ALT+DEL ved login
+
+Sti: HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System
+
+DWORD: DisableCAD = 0
+
+Fordele: Sikrer, at login-skærmen kun fremkaldes ved rigtigt tastetryk, hvilket forhindrer falske phishing-loginvinduer.
+
+Ulemper: Kræver et ekstra tastetryk, hver gang du skal logge på.
+
+Tøm Sidefilen (Pagefile) ved nedlukning
+
+Sti: HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management
+
+DWORD: ClearPageFileAtShutdown = 1
+
+Fordele: Sletter alle midlertidige data i sidefilen, når pc'en slukker, så adgangskoder i hukommelsen ikke kan udlæses fysisk.
+
+Ulemper: Gør nedlukning af computeren mærkbart langsommere.
+
+Deaktiver anonym adgang til netværksdelinger
+
+Sti: HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa
+
+DWORD: RestrictAnonymous = 1
+
+Fordele: Forhindrer uidentificerede brugere på netværket i at se, hvilke mapper du deler.
+
+Ulemper: Kan skabe problemer på ældre lukkede netværk med gæstekonti uden adgangskode.
+
+Slå LM og NTLMv1 netværksgodkendelse fra
+
+Sti: HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa
+
+DWORD: LmCompatibilityLevel = 5
+
+Fordele: Tvinger Windows til udelukkende at bruge det stærke NTLMv2, hvilket beskytter mod netværks-sniffing.
+
+Ulemper: Ældre NAS-enheder eller ældre Windows-versioner på netværket kan miste evnen til at godkende sig.
+
+Slå beskyttelse mod DMA-angreb til på låseskærmen
+
+Sti: HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Kernel\DMA Guard
+
+DWORD: DeviceEnumerationPolicy = 0
+
+Fordele: Forhindrer datatyveri via fysiske porte (f.eks. Thunderbolt) mens computeren er låst.
+
+Ulemper: Blokerer for tilslutning af visse enheder via hurtige porte før oplåsning.
+
+Bloker OneDrive før login
+
+Sti: HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\OneDrive
+
+DWORD: DisableFileSyncNGSC = 1
+
+Fordele: Forhindrer OneDrive i at synkronisere filer, før du har låst computeren op.
+
+Ulemper: Sky-filer opdateres først, når du manuelt åbner OneDrive efter login.
+
+Skjul administrator-kontoen på login-skærmen
+
+Sti: HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon\SpecialAccounts\UserList
+
+DWORD: Administrator = 0
+
+Fordele: Den indbyggede nød-konto "Administrator" skjules mod brute-force angreb.
+
+Ulemper: Kan gøre det sværere at logge ind i fejlsikret tilstand, hvis din primære bruger mister admin-rettigheder.
+
+Tving BitLocker til stærkere kryptering (XTS-AES 256)
+
+Sti: HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\FVE
+
+DWORD: EncryptionMethodWithXtsAes256 = 1
+
+Fordele: Opgraderer standard-krypteringstypen for BitLocker fra 128-bit til det maksimale 256-bit niveau.
+
+Ulemper: Kræver en lille smule mere CPU-kraft ved diskoperationer (dog næsten umærkeligt på moderne hardware).
+
+Deaktiver SMBv1-protokollen
+
+Sti: HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\LanmanServer\Parameters
+
+DWORD: SMB1 = 1 (eller 0 for deaktivering)
+
+Fordele: Lukker en ekstremt sårbar fildelingsprotokol (kendt fra WannaCry-ransomware).
+
+Ulemper: Du kan ikke længere tilgå meget gamle netværksdrev eller ældre printere, der kun understøtter SMBv1.
+
+Deaktiver automatisk kørsel af Windows-opdateringer under aktive timer
+
+Sti: HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU
+
+DWORD: NoAutoRebootWithLoggedOnUsers = 1
+
+Fordele: Sikrer, at computeren aldrig genstarter automatisk midt i vigtigt arbejde eller præsentationer.
+
+Ulemper: Opdateringerne afventer, indtil du manuelt vælger at genstarte.
+
+Deaktiver fjern-eksekvering via PowerShell (PSRemoting)
+
+Sti: HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\PowerShell\1\ShellIds
+
+DWORD: ConsolePromptBehavior = 2
+
+Fordele: Forhindrer angribere i at køre PowerShell-kommandoer på din maskine over det lokale netværk.
+
+Ulemper: Gør det umuligt for administratorer at fjernadministrere computeren via PowerShell.
+
+Bloker adgang til registreringsdatabasen for almindelige brugere
+
+Sti: HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Policies\System
+
+DWORD: DisableRegistryTools = 1
+
+Fordele: Sikrer, at gæstekonti eller standardbrugere ikke kan åbne regedit.
+
+Ulemper: Du kan ikke selv åbne registreringsdatabasen, før værdien ændres tilbage.
+
+Forhindr adgang til kommandoprompten (CMD)
+
+Sti: HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Policies\System
+
+DWORD: DisableCMD = 1
+
+Fordele: Stopper ondsindede scripts i at åbne CMD i baggrunden under dit brugerlogin.
+
+Ulemper: Du kan ikke selv køre manuelle kommandoer i CMD.
+
+Slå Remote Desktop (RDP) helt fra
+
+Sti: HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Terminal Server
+
+DWORD: fDenyTSConnections = 1
+
+Fordele: Lukker port 3389 permanent, så ingen kan logge ind på din pc udefra via Fjernskrivebord.
+
+Ulemper: Du kan ikke selv fjernstyre computeren udefra via RDP.
+
+Skærp adgangskode-historik (Forhindr genbrug)
+
+Sti: HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa
+
+DWORD: PasswordHistorySize = 24
+
+Fordele: Tvinger Windows til at huske dine gamle adgangskoder, så du ikke kan genbruge dem.
+
+Ulemper: Kan gøre det svært at huske nye koder, hvis man skifter meget.
+
+Deaktiver Windows Hello-bekræftelse uden pinkode
+
+Sti: HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\System
+
+DWORD: AllowDomainPINLogon = 0
+
+Fordele: Sikrer mod svage alternative loginmetoder i virksomhedsmiljøer.
+
+Ulemper: Mister bekvemmeligheden ved hurtigt at logge ind med en kort PIN-kode.
+
+Tving automatisk låsning af computeren ved inaktivitet
+
+Sti: HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System
+
+DWORD: InactivityTimeoutSecs = 900 (15 minutter)
+
+Fordele: Låser computeren proaktivt, hvis du forlader den uden at låse den manuelt.
+
+Ulemper: Kan være irriterende, hvis du læser lange tekster uden at røre mus eller tastatur.
+
+Slå fjernadgang til administrative delinger (C$) fra
+
+Sti: HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System
+
+DWORD: LocalAccountTokenFilterPolicy = 0
+
+Fordele: Stopper hackere i at tilgå hele dit C-drev over netværket via skjulte standard-delinger.
+
+Ulemper: Gør det sværere for IT-administratorer at tilgå maskinen administrativt over netværket.
+
+Bloker eksekvering af makroer i Office-dokumenter
+
+Sti: HKEY_CURRENT_USER\SOFTWARE\Policies\Microsoft\Office\16.0\word\security (samt Excel)
+
+DWORD: BlockMacrosFromInternet = 1
+
+Fordele: Stopper den primære kilde til ransomware-infektioner via phishing-mails.
+
+Ulemper: Lovlige dokumenter fra eksterne afsendere, der kræver makroer, vil ikke køre dem, før de tillades manuelt.
+
+Deaktiver Wi-Fi Sense
+
+Sti: HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\WcmSvc\wifinetworks\Config
+
+DWORD: AutoConnectAllowed = 0
+
+Fordele: Forhindrer Windows i automatisk at oprette forbindelse til åbne, potentielt usikre Wi-Fi-hotspots.
+
+Ulemper: Du skal selv manuelt godkende alle nye trådløse netværk.
+
+Skjul fuldt navn og e-mail på låseskærmen
+
+Sti: HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System
+
+DWORD: DontDisplayLockedUserId = 3
+
+Fordele: Beskytter privatlivet mod "shoulder-surfing" på offentlige steder.
+
+Ulemper: Gør det mindre overskueligt, præcist hvilken brugerkonto der er aktiv ved flere brugere.
+
+Tving kontrol af certifikater (OCSP)
+
+Sti: HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\SystemCertificates\ChainEngine
+
+DWORD: State = 1
+
+Fordele: Sikrer, at Windows tjekker, om et certifikat er tilbagekaldt, før et program installeres.
+
+Ulemper: Kan give en lille forsinkelse ved installation af programmer, hvis certifikatserveren svarer langsomt.
+
+Deaktiver uautoriseret kameratilgang på systemniveau
+
+Sti: HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\AppPrivacy
+
+DWORD: LetAppsAccessCamera = 2 (Benægt altid)
+
+Fordele: Lukker for webkameraet for alle apps, indtil du manuelt slår det til (godt mod spion-malware).
+
+Ulemper: Apps som Teams, Zoom eller Discord kan ikke bruge kameraet, før tilladelsen ændres.
+
+Deaktiver uautoriseret mikrofontilgang
+
+Sti: HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\AppPrivacy
+
+DWORD: LetAppsAccessMicrophone = 2
+
+Fordele: Blokerer aflytning via ondsindet baggrundssoftware.
+
+Ulemper: Opkaldsprogrammer og spil-chat kan ikke tilgå mikrofonen uden tilladelse.
+
+Slå "Stifinder-historik" fra på netværksdrev
+
+Sti: HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer
+
+DWORD: NoRecentDocsHistory = 1
+
+Fordele: Forhindrer, at andre brugere på et delt netværk kan se, hvilke filer du for nylig har arbejdet på.
+
+Ulemper: Du mister din egen genvejsliste over senest åbnede filer i Stifinder.
+
+🕵️ 6. Privatliv og Windows-irritationer (20 ting samlet)
+(Dette dækker både "Privatliv og Windows-irritationer" og "Dybdegående Privatliv og Netværk" fra din oprindelige opdeling).
+
+Slå Bing-søgninger fra i Start-menuen
+
+Sti: HKEY_CURRENT_USER\SOFTWARE\Policies\Microsoft\Windows\Explorer
+
+DWORD: DisableSearchBoxSuggestions = 1
+
+Fordele: Fjerner internetforslag og Bing-søgninger fra Start-menuen, hvilket gør lokale søgninger hurtigere.
+
+Ulemper: Du kan ikke længere søge direkte på nettet via Start-menuens søgefelt.
+
+Slå Windows Sporing af App-start fra
+
+Sti: HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced
+
+DWORD: Start_TrackProgs = 0
+
+Fordele: Stopper Windows i at overvåge, hvilke programmer du åbner oftest.
+
+Ulemper: Start-menuen mister evnen til automatisk at vise dine "Mest brugte" programmer.
+
+Fjern "Mød nu" (Meet Now) ikonet
+
+Sti: HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer
+
+DWORD: HideSCAMeetNow = 1
+
+Fordele: Fjerner Skype/Teams-genvejen permanent fra proceslinjen.
+
+Ulemper: Ingen nævneværdige ulemper.
+
+Deaktiver personlige reklame-id'er
+
+Sti: HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\AdvertisingInfo
+
+DWORD: Enabled = 0
+
+Fordele: Forhindrer Microsoft i at tildele dig et unikt ID til målrettede reklamer.
+
+Ulemper: Annoncer i gratis apps vil være helt generiske.
+
+Deaktiver "Oplevelser i fokus" (Windows Spotlight) på låseskærmen
+
+Sti: HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager
+
+DWORD: SubscribedContent-338387Enabled = 0
+
+Fordele: Stopper Microsoft i at placere forslag til spil og apps på din låseskærm.
+
+Ulemper: Du mister de skiftende Bing-billeder på låseskærmen.
+
+Slå lokationssporing helt fra
+
+Sti: HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\LocationAndSensors
+
+DWORD: DisableLocation = 1
+
+Fordele: Stopper absolut alt brug af GPS og lokationstjenester i baggrunden.
+
+Ulemper: Apps som Vejr og Maps kan ikke automatisk finde din position.
+
+Slå feedback-påmindelser fra
+
+Sti: HKEY_CURRENT_USER\Software\Microsoft\Siuf\Rules
+
+DWORD: NumberOfHeartbeatsAllowed = 0
+
+Fordele: Stopper Windows i konstant at poppe op og spørge, hvor tilfreds du er.
+
+Ulemper: Ingen ulemper.
+
+Deaktiver Activity History (Tidslinje)
+
+Sti: HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\System
+
+DWORD: PublishUserActivities = 0
+
+Fordele: Stopper Windows i at gemme en historik over dine åbnede filer og websider på tværs af enheder.
+
+Ulemper: Du kan ikke bruge Windows Tidslinje til at finde ældre dokumenter.
+
+Fjern automatiske app-installationer (Bloatware)
+
+Sti: HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager
+
+DWORD: PreinstalledAppsWithContentEnabled = 0
+
+Fordele: Stopper Windows i automatisk at downloade spil som Candy Crush ved opdateringer.
+
+Ulemper: Ingen ulemper.
+
+Tving klassisk højrekliksmenu (Kun Windows 11)
+
+Sti: HKEY_CURRENT_USER\Software\Classes\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\InprocServer32
+
+Streng: Sæt værdien til at være helt blank.
+
+Fordele: Gør højreklik i Stifinder markant hurtigere ved at springe den nye, tunge menu over.
+
+Ulemper: Du mister genvejene til nye funktioner i den moderne menu.
+
+Slå Microsoft Edge Pre-loading fra
+
+Sti: HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\MicrosoftEdge\Main
+
+DWORD: AllowPrelaunch = 0
+
+Fordele: Stopper Edge i i smug at starte processer op i baggrunden, før du har åbnet browseren.
+
+Ulemper: Edge tager en anelse længere tid om at åbne første gang.
+
+Deaktiver sporing af placering for Windows-ure og tidszoner
+
+Sti: HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\tzautoupdate
+
+DWORD: Start = 4
+
+Fordele: Stopper systemet i konstant at pinge netværket for at finde tidszonen.
+
+Ulemper: Ved rejser skal du selv manuelt rette klokkeslæt/tidszone.
+
+Fjern "Tips og tricks om Windows"
+
+Sti: HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager
+
+DWORD: SoftLandingEnabled = 0
+
+Fordele: Stopper pop-up-notifikationer, der sporer din brugsadfærd under påskud af at lære dig Windows.
+
+Ulemper: Ingen ulemper.
+
+Deaktiver Windows Fejlfindings-telemetri
+
+Sti: HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\WDI
+
+DWORD: ScenarioExecutionEnabled = 0
+
+Fordele: Stopper Microsoft i at køre automatiske diagnosticeringsværktøjer uden tilladelse.
+
+Ulemper: Indbyggede fejlsøgningsværktøjer kan miste evnen til automatisk at indsamle dybdegående data.
+
+Slå OneDrive Cloud-søgning fra i Stifinder
+
+Sti: HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced
+
+DWORD: CloudSearch = 0
+
+Fordele: Stopper Stifinder i at gennemsøge din OneDrive-sky, hver gang du søger efter en lokal fil.
+
+Ulemper: Søgefeltet medtager ikke filer, der udelukkende ligger i skyen.
+
+Forhindr SmartScreen i at sende data om downloadede filer
+
+Sti: HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\System
+
+DWORD: EnableSmartScreen = 0
+
+Fordele: Øger privatlivet ved at minimere mængden af metadata om downloads, der sendes til validering.
+
+Ulemper: Du mister advarsler ved download af potentielt skadelig software (bør kun gøres ved stærkt eksternt antivirus).
+
+Stop automatisk download af kortdata
+
+Sti: HKEY_LOCAL_MACHINE\SYSTEM\Maps
+
+DWORD: AutoDownloadMapsInBackground = 0
+
+Fordele: Stopper baggrundstjenesten i at downloade gigabyte af geografiske data, hvis du ikke bruger Kort-appen.
+
+Ulemper: Manglende offline-kortdata, hvis du åbner Kort-appen uden netværk.
+
+Deaktiver synkronisering af Windows-indstillinger til skyen
+
+Sti: HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\SettingSync
+
+DWORD: SyncSettings = 0
+
+Fordele: Stopper Microsoft i at uploade Wi-Fi-adgangskoder og personlige indstillinger til din konto.
+
+Ulemper: Præferencer synkroniseres ikke automatisk til andre Windows-enheder.
+
+Slå app-historik og diagnosticering fra for din brugerkonto
+
+Sti: HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Privacy
+
+DWORD: TailoredExperiencesWithDiagnosticDataEnabled = 0
+
+Fordele: Fjerner skræddersyede oplevelser og personlige tips baseret på diagnosticering.
+
+Ulemper: Ingen væsentlige ulemper.
+
+Forhindr Windows i at dele dine håndskriftsdata
+
+Sti: HKEY_CURRENT_USER\Software\Microsoft\InputPersonalization
+
+DWORD: RestrictImplicitTextCollection = 1
+
+Fordele: Stopper Microsoft i at indsamle det, du skriver med digital pen, for at "forbedre ordbogen".
+
+Ulemper: Ordforslag og autokorrektur kan blive en anelse mindre intelligente over tid.
+
+🏎️ 7. Avanceret Hardware og Kerne-ydeevne (15 ting)
+Slå CPU Core Parking fra
+
+Sti: HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Power\PowerSettings\54533251-82be-4824-96c1-47b60b740d00\0cc5b647-c1df-4637-891a-dec35c318583
+
+DWORD: Attributes = 0
+
+Fordele: Tvinger Windows til altid at holde alle CPU-kerner vågne, hvilket eliminerer mikro-lag, når en kerne skal vækkes.
+
+Ulemper: Øger strømforbruget og varmeudviklingen.
+
+Optimer GPU-skemalægning (HAGS)
+
+Sti: HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\GraphicsDrivers
+
+DWORD: HwSchMode = 2
+
+Fordele: Aktiverer hardwareaccelereret GPU-skemalægning for at reducere CPU-overhead i spil.
+
+Ulemper: Kan på enkelte ældre grafikkort skabe mikrostotren.
+
+Deaktiver unødvendige dump-filer ved systemnedbrud
+
+Sti: HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\CrashControl
+
+DWORD: CrashDumpEnabled = 0
+
+Fordele: Stopper Windows i at skrive enorme .dmp-filer til harddisken ved krasj, hvilket sparer SSD-plads.
+
+Ulemper: Gør det umuligt at analysere årsagen til blå skærme (Blue Screens) ved fejlsøgning.
+
+Forøg LargeSystemCache
+
+Sti: HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management
+
+DWORD: LargeSystemCache = 1
+
+Fordele: Tvinger Windows til at bruge en større del af din RAM som fil-cache, hvilket gør filåbning hurtigere.
+
+Ulemper: Anbefales kun ved 16 GB RAM eller mere; ellers stjæles der RAM fra andre programmer.
+
+Slå Windows Error Reporting (WER) fra
+
+Sti: HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\Windows Error Reporting
+
+DWORD: Disabled = 1
+
+Fordele: Stopper systemet i at bruge CPU-ressourcer på at indsamle og sende fejlrapporter til Microsoft.
+
+Ulemper: Microsoft modtager ikke fejlrapporter, hvilket kan forsinke generelle rettelser i fremtidige opdateringer.
+
+Deaktiver unødvendige filsystem-funktioner (8dot3Name)
+
+Sti: HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\FileSystem
+
+DWORD: NtfsDisable8dot3NameCreation = 1
+
+Fordele: Stopper Windows i at oprette alternative korte filnavne (f.eks. FILENA~1.TXT) til gamle DOS-programmer.
+
+Ulemper: Visse meget gamle programmer afhængige af korte 8.3-navne vil fejle.
+
+Optimer netværkskortets afbrydelsesprioritet
+
+Sti: HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\PriorityControl
+
+DWORD: IRQPriority = 1
+
+Fordele: Tvinger CPU'en til at behandle data fra netværkskortet med højeste prioritet.
+
+Ulemper: Kan teoretisk stjæle opmærksomhed fra andre hardware-IRQ'er på ældre systemer.
+
+Deaktiver Remote Differential Compression
+
+Sti: HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Alg\ISV
+
+DWORD: DisableRDC = 1
+
+Fordele: Stopper Windows i konstant at beregne ændringer i filer, der synkroniseres over netværket.
+
+Ulemper: Visse netværksfunktioner, der bruger RDC, mister denne optimering.
+
+Tving maksimal strømstyring på PCIe-porte
+
+Sti: HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Power\PowerSettings\501a4d13-42af-4429-9fd1-a8218c268e20\ee12f251-da30-4e08-94b5-2b35a669d9c2
+
+DWORD: Attributes = 0
+
+Fordele: Forhindrer Windows i at sætte grafikkort eller NVMe SSD i dvaletilstand (Link State Power Management).
+
+Ulemper: Øger strømforbruget på bærbare computere.
+
+Deaktiver Windows Ink Workspace
+
+Sti: HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\WindowsInkWorkspace
+
+DWORD: AllowWindowsInkWorkspace = 0
+
+Fordele: Slår touch- og pen-funktioner fra i baggrunden, hvis du kun bruger mus og tastatur.
+
+Ulemper: De indbyggede genveje til digital pen virker ikke.
+
+Hurtigere genkendelse af USB-enheder
+
+Sti: HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\USB
+
+DWORD: DisableSelectiveSuspend = 1
+
+Fordele: Reducerer den tid Windows bruger på at konfigurere og genkende en USB-enhed.
+
+Ulemper: USB-enheder slukker ikke for strømmen i inaktive perioder (koster lidt ekstra strøm).
+
+Forhindr Windows i at parkere harddiske (Spin-down)
+
+Sti: HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Power\PowerSettings\0012ee47-9041-4b5d-9b77-535fba8b1442\6738e2c6-ee1b-478f-911d-3147596db1d4
+
+DWORD: Attributes = 0
+
+Fordele: Stopper mekaniske harddiske i at gå i dvale, hvilket fjerner den 2-sekunders pause, når disken skal starte.
+
+Ulemper: Øger sliddet på mekaniske harddiske, da disken spinder uafbrudt.
+
+Deaktiver unødvendig skrifttype-caching
+
+Sti: HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\FontCache\Flags
+
+DWORD: DisableFontCache = 1
+
+Fordele: Sparer RAM på systemer, der ikke bruger store mængder skrifttyper.
+
+Ulemper: Tunge programmer, der bruger mange skrifttyper (f.eks. Photoshop), loade langsommere.
+
+Tving hurtigere opdatering af skrivebordet (F5-hastighed)
+
+Sti: HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Update
+
+DWORD: UpdateMode = 0
+
+Fordele: Gør, at ændringer i filer og mapper vises øjeblikkeligt uden behov for at trykke F5.
+
+Ulemper: Kan give lidt højere CPU-aktivitet ved massiv filhåndtering.
+
+Slå Diagnostics Tracking Service permanent fra
+
+Sti: HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\DiagTrack
+
+DWORD: Start = 4
+
+Fordele: Stopper Microsofts indbyggede baggrundstjeneste (DiagTrack), som overvåger hardwareadfærd.
+
+Ulemper: Gør indbygget systemdiagnostik mindre præcis.
+
+🧹 8. UI-Rengøring og System-strømlining (10 ting)
+Fjern "Galleri" (Gallery) ikonet i Windows 11 Stifinder
+
+Sti: HKEY_CURRENT_USER\Software\Classes\CLSID\{e8886505-2960-4960-9d5d-e6c386641679}
+
+DWORD: System.IsPinnedToNameSpaceTree = 0
+
+Fordele: Gør Stifinder mere overskuelig ved at fjerne den tunge billedfane.
+
+Ulemper: Du kan ikke længere tilgå Galleri-visningen direkte i venstre menu.
+
+Deaktiver Windows Styresystem-lyd ved opstart
+
+Sti: HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Authentication\LogonUI
+
+DWORD: DisableStartupSound = 1
+
+Fordele: Slår den klassiske opstartslyd permanent fra, så computeren starter lydløst op.
+
+Ulemper: Ingen, udover tab af opstartslyd.
+
+Fjern "Hjem" (Home/Quick Access) som standardplacering i Stifinder
+
+Sti: HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced
+
+DWORD: LaunchTo = 1 (1 er "Denne pc")
+
+Fordele: Tvinger Stifinder til altid at åbne direkte i "Denne pc" frem for "Hjem" (hurtigere indlæsning).
+
+Ulemper: Du mødes ikke automatisk af dine nyligt åbnede filer.
+
+Deaktiver Sticky Keys popup-vinduet
+
+Sti: HKEY_CURRENT_USER\Control Panel\Accessibility\StickyKeys
+
+Streng: Flags = 506
+
+Fordele: Stopper den irriterende boks, der popper op, hvis du trykker 5 gange på Shift-tasten under spil.
+
+Ulemper: Du mister advarslen for tilgængelighedsfunktionen Sticky Keys.
+
+Deaktiver Windows Taskbar Badges
+
+Sti: HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced
+
+DWORD: TaskbarBadges = 0
+
+Fordele: Slår notifikationsprikker og tal fra på proceslinjens ikoner, hvilket reducerer visuel støj.
+
+Ulemper: Du kan ikke se ulæste notifikationstal direkte på app-ikonerne.
+
+Fjern widget-boardet helt (Windows 11)
+
+Sti: HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Dsh
+
+DWORD: AllowWidgets = 0
+
+Fordele: Slår nyheds- og vejr-widget-panelet fra, hvilket sparer RAM og netværk i baggrunden.
+
+Ulemper: Du kan ikke længere åbne Windows-widgets.
+
+Tving ikoner i proceslinjen til ALDRIG at grupperes
+
+Sti: HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced
+
+DWORD: TaskbarGlomLevel = 1
+
+Fordele: Giver hvert åbent vindue sin egen knap på proceslinjen med fuld tekst (klassisk stil).
+
+Ulemper: Proceslinjen fyldes hurtigt op ved mange åbne programmer.
+
+Deaktiver Low Disk Space advarsler
+
+Sti: HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer
+
+DWORD: NoLowDiskSpaceChecks = 1
+
+Fordele: Stopper Windows i konstant at poppe op med advarsler om lav diskplads på fyldte sekundære drev.
+
+Ulemper: Du får ingen tidlig advarsel, hvis dit systemdrev (C:) er ved at løbe tør for plads.
+
+Skjul "Hjælp" genvejen (F1) på skrivebordet
+
+Sti: HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer
+
+DWORD: NoHelpMenu = 1
+
+Fordele: Forhindrer, at du ved et uheld trykker F1 og åbner en unødvendig Microsoft Edge-hjælpeside.
+
+Ulemper: F1-tasten virker ikke længere som genvej til hjælpemenuer.
+
+Fjern "3D-objekter" mappen fra Denne PC
+
+Sti: HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FolderDescriptions\{31C0B597-4B03-4A55-9A10-0E0D32F1E4A5}\PropertyBag
+
+DWORD: ThisPCHidingOnDesktop = 1
+
+Fordele: Fjerner den ubrugte standardmappe for at rydde op i din filstruktur under "Denne pc".
+
+Ulemper: Ingen væsentlige ulemper.

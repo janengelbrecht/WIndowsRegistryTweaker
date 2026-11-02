@@ -1,0 +1,31 @@
+name: Build Windows Binary
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Install Lazarus & Free Pascal
+      uses: gcarreno/setup-lazarus@v3.2.14
+      with:
+        lazarus-version: "stable"
+        with-vstfs: false
+
+    - name: Build Project
+      run: |
+        lazbuild --build-mode=Default WinRegistryTweaker.lpi
+
+    - name: Upload compiled executable
+      uses: actions/upload-artifact@v4
+      with:
+        name: WinRegistryTweaker-Binary
+        path: WinRegistryTweaker.exe

@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CONFIG>
+  <ProjectSession>
+    <PathDelim Value="\"/>
+    <Version Value="12"/>
+    <BuildModes Active="Default"/>
+    <Units Count="6">
+      <Unit0>
+        <Filename Value="WinRegistryTweaker.lpr"/>
+        <IsPartOfProject Value="True"/>
+        <EditorIndex Value="5"/>
+        <UsageCount Value="23"/>
+        <Loaded Value="True"/>
+      </Unit0>
+      <Unit1>
+        <Filename Value="uMain.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="FormMain"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <IsVisibleTab Value="True"/>
+        <EditorIndex Value="4"/>
+        <TopLine Value="780"/>
+        <CursorPos X="73" Y="823"/>
+        <UsageCount Value="23"/>
+        <Loaded Value="True"/>
+      </Unit1>
+      <Unit2>
+        <Filename Value="uHelp.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="FormHelp"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <EditorIndex Value="1"/>
+        <UsageCount Value="20"/>
+        <Loaded Value="True"/>
+      </Unit2>
+      <Unit3>
+        <Filename Value="uMain.lfm"/>
+        <HasResources Value="True"/>
+        <EditorIndex Value="2"/>
+        <UsageCount Value="11"/>
+        <Loaded Value="True"/>
+        <DefaultSyntaxHighlighter Value="LFM"/>
+      </Unit3>
+      <Unit4>
+        <Filename Value="uHelp.lfm"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+        <DefaultSyntaxHighlighter Value="LFM"/>
+      </Unit4>
+      <Unit5>
+        <Filename Value="WinRegistryTweaker.lpi"/>
+        <EditorIndex Value="3"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+        <DefaultSyntaxHighlighter Value="XML"/>
+      </Unit5>
+    </Units>
+    <JumpHistory Count="7" HistoryIndex="6">
+      <Position1>
+        <Filename Value="uMain.lfm"/>
+      </Position1>
+      <Position2>
+        <Filename Value="uMain.pas"/>
+        <Caret Line="475" Column="23" TopLine="435"/>
+      </Position2>
+      <Position3>
+        <Filename Value="uMain.pas"/>
+        <Caret Line="113" Column="10" TopLine="92"/>
+      </Position3>
+      <Position4>
+        <Filename Value="uMain.pas"/>
+        <Caret Line="124" Column="6" TopLine="103"/>
+      </Position4>
+      <Position5>
+        <Filename Value="uMain.pas"/>
+        <Caret Line="242" Column="15" TopLine="221"/>
+      </Position5>
+      <Position6>
+        <Filename Value="uMain.pas"/>
+        <Caret Line="931" Column="10" TopLine="931"/>
+      </Position6>
+      <Position7>
+        <Filename Value="uMain.pas"/>
+        <Caret Line="728" TopLine="728"/>
+      </Position7>
+    </JumpHistory>
+    <RunParams>
+      <FormatVersion Value="2"/>
+      <Modes ActiveMode=""/>
+    </RunParams>
+  </ProjectSession>
+</CONFIG>

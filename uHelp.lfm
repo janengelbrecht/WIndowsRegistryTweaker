@@ -1,0 +1,172 @@
+object FormHelp: TFormHelp
+  Left = 320
+  Height = 600
+  Top = 180
+  Width = 920
+  Caption = 'Hjælp og brugervejledning - Windows Registry Tweaker Pro'
+  ClientHeight = 600
+  ClientWidth = 920
+  Color = 15921906
+  Font.CharSet = ANSI_CHARSET
+  Font.Color = clBlack
+  Font.Height = -13
+  Font.Name = 'Segoe UI'
+  Font.Pitch = fpVariable
+  Font.Quality = fqDraft
+  OnCreate = FormCreate
+  Position = poScreenCenter
+  LCLVersion = '2.2.6.0'
+  object PanelTop: TPanel
+    Left = 0
+    Height = 60
+    Top = 0
+    Width = 920
+    Align = alTop
+    BevelOuter = bvNone
+    Color = 2960685
+    ParentColor = False
+    TabOrder = 0
+    object LblTitle: TLabel
+      Left = 20
+      Height = 25
+      Top = 8
+      Width = 370
+      Caption = 'Brugervejledning && Dokumentation'
+      Font.CharSet = ANSI_CHARSET
+      Font.Color = clWhite
+      Font.Height = -19
+      Font.Name = 'Segoe UI'
+      Font.Pitch = fpVariable
+      Font.Quality = fqDraft
+      Font.Style = [fsBold]
+      ParentColor = False
+      ParentFont = False
+    end
+    object LblSubTitle: TLabel
+      Left = 20
+      Height = 17
+      Top = 34
+      Width = 478
+      Caption = 'Lær hvordan du optimerer, hærder og genskaber dit system på en sikker måde'
+      Font.CharSet = ANSI_CHARSET
+      Font.Color = 14474460
+      Font.Height = -13
+      Font.Name = 'Segoe UI'
+      Font.Pitch = fpVariable
+      Font.Quality = fqDraft
+      ParentColor = False
+      ParentFont = False
+    end
+  end
+  object PanelBottom: TPanel
+    Left = 0
+    Height = 48
+    Top = 552
+    Width = 920
+    Align = alBottom
+    BevelOuter = bvNone
+    Color = 15329769
+    ParentColor = False
+    TabOrder = 1
+    object BtnClose: TButton
+      Left = 780
+      Height = 32
+      Top = 8
+      Width = 120
+      Anchors = [akTop, akRight]
+      Caption = 'Luk hjælp'
+      Font.CharSet = ANSI_CHARSET
+      Font.Color = clBlack
+      Font.Height = -13
+      Font.Name = 'Segoe UI'
+      Font.Pitch = fpVariable
+      Font.Quality = fqDraft
+      Font.Style = [fsBold]
+      OnClick = BtnCloseClick
+      ParentFont = False
+      TabOrder = 0
+    end
+  end
+  object PanelLeft: TPanel
+    Left = 0
+    Height = 492
+    Top = 60
+    Width = 260
+    Align = alLeft
+    BevelOuter = bvNone
+    Color = 15921906
+    ParentColor = False
+    TabOrder = 2
+    object LblTopics: TLabel
+      Left = 12
+      Height = 17
+      Top = 10
+      Width = 96
+      Caption = 'Vælg et emne:'
+      Font.CharSet = ANSI_CHARSET
+      Font.Color = clBlack
+      Font.Height = -13
+      Font.Name = 'Segoe UI'
+      Font.Pitch = fpVariable
+      Font.Quality = fqDraft
+      Font.Style = [fsBold]
+      ParentColor = False
+      ParentFont = False
+    end
+    object ListBoxTopics: TListBox
+      Left = 12
+      Height = 450
+      Top = 32
+      Width = 236
+      Align = alNone
+      Anchors = [akTop, akLeft, akBottom, akRight]
+      Font.CharSet = ANSI_CHARSET
+      Font.Color = clBlack
+      Font.Height = -13
+      Font.Name = 'Segoe UI'
+      Font.Pitch = fpVariable
+      Font.Quality = fqDraft
+      ItemHeight = 0
+      OnSelectionChange = ListBoxTopicsSelectionChange
+      ParentFont = False
+      TabOrder = 0
+    end
+  end
+  object SplitterH: TSplitter
+    Cursor = crHSplit
+    Left = 260
+    Height = 492
+    Top = 60
+    Width = 5
+  end
+  object PanelContent: TPanel
+    Left = 265
+    Height = 492
+    Top = 60
+    Width = 655
+    Align = alClient
+    BevelOuter = bvNone
+    BorderWidth = 10
+    Color = 15921906
+    ParentColor = False
+    TabOrder = 4
+    object MemoContent: TMemo
+      Left = 10
+      Height = 472
+      Top = 10
+      Width = 635
+      Align = alClient
+      Color = clWhite
+      Font.CharSet = ANSI_CHARSET
+      Font.Color = clBlack
+      Font.Height = -13
+      Font.Name = 'Segoe UI'
+      Font.Pitch = fpVariable
+      Font.Quality = fqDraft
+      ParentFont = False
+      ReadOnly = True
+      ScrollBars = ssAutoVertical
+      TabOrder = 0
+    end
+  end
+end

@@ -1,0 +1,34 @@
+# Lazarus / Free Pascal kompilerede binære filer
+*.exe
+*.dll
+*.so
+*.dylib
+*.bin
+
+# FPC mellemliggende objekt- og units-filer
+lib/
+backup/
+*.o
+*.ppu
+*.a
+*.s
+*.rst
+*.compiled
+
+# Lazarus projektsessioner (indeholder lokale cursor-positioner og åbne faner)
+*.lps
+*.lps.*
+
+# Ressource-outputfiler genereret under build
+*.res
+*.or
+
+# Logfiler og styresystem-specifikke filer
+*.log
+Thumbs.db
+[Dd]esktop.ini
+.DS_Store
+
+# Test- og midlertidige eksportfiler
+WinTweaker_Backup_*.reg
+*.tmp

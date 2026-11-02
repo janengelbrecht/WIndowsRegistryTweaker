@@ -1,0 +1,271 @@
+object FormMain: TFormMain
+  Left = 240
+  Height = 720
+  Top = 130
+  Width = 1040
+  Caption = 'Windows Registry Tweaker Pro'
+  ClientHeight = 720
+  ClientWidth = 1040
+  Color = 15921906
+  Font.CharSet = ANSI_CHARSET
+  Font.Color = clBlack
+  Font.Height = -13
+  Font.Name = 'Segoe UI'
+  Font.Pitch = fpVariable
+  Font.Quality = fqDraft
+  Menu = MainMenu1
+  OnCreate = FormCreate
+  OnDestroy = FormDestroy
+  Position = poScreenCenter
+  LCLVersion = '2.2.6.0'
+  object PanelHeader: TPanel
+    Left = 0
+    Height = 65
+    Top = 0
+    Width = 1040
+    Align = alTop
+    BevelOuter = bvNone
+    Color = 2960685
+    ParentColor = False
+    TabOrder = 0
+    object LblTitle: TLabel
+      Left = 24
+      Height = 28
+      Top = 10
+      Width = 328
+      Caption = 'Windows Registry Tweaker Pro'
+      Font.CharSet = ANSI_CHARSET
+      Font.Color = clWhite
+      Font.Height = -20
+      Font.Name = 'Segoe UI'
+      Font.Pitch = fpVariable
+      Font.Quality = fqDraft
+      Font.Style = [fsBold]
+      ParentColor = False
+      ParentFont = False
+    end
+    object LblSubTitle: TLabel
+      Left = 25
+      Height = 17
+      Top = 38
+      Width = 512
+      Caption = 'Skræddersyet optimering, hardcore sikkerhedshærdning og system-strømlining'
+      Font.CharSet = ANSI_CHARSET
+      Font.Color = 14474460
+      Font.Height = -13
+      Font.Name = 'Segoe UI'
+      Font.Pitch = fpVariable
+      Font.Quality = fqDraft
+      ParentColor = False
+      ParentFont = False
+    end
+  end
+  object PageControl1: TPageControl
+    Left = 0
+    Height = 370
+    Top = 65
+    Width = 1040
+    Align = alClient
+    Font.CharSet = ANSI_CHARSET
+    Font.Color = clBlack
+    Font.Height = -13
+    Font.Name = 'Segoe UI'
+    Font.Pitch = fpVariable
+    Font.Quality = fqDraft
+    ParentFont = False
+    TabOrder = 1
+  end
+  object Splitter1: TSplitter
+    Cursor = crVSplit
+    Left = 0
+    Height = 6
+    Top = 435
+    Width = 1040
+    Align = alBottom
+    Beveled = True
+    ResizeAnchor = akBottom
+  end
+  object GroupInfo: TGroupBox
+    Left = 0
+    Height = 210
+    Top = 441
+    Width = 1040
+    Align = alBottom
+    Caption = '  Tweak Information & Detaljer  '
+    ClientHeight = 188
+    ClientWidth = 1036
+    Font.CharSet = ANSI_CHARSET
+    Font.Color = clNavy
+    Font.Height = -13
+    Font.Name = 'Segoe UI'
+    Font.Pitch = fpVariable
+    Font.Quality = fqDraft
+    Font.Style = [fsBold]
+    ParentFont = False
+    TabOrder = 3
+    object LblInfoName: TLabel
+      Left = 16
+      Height = 20
+      Top = 4
+      Width = 1004
+      Anchors = [akTop, akLeft, akRight]
+      Caption = 'Før musen hen over et punkt for at se fordele og ulemper...'
+      Font.CharSet = ANSI_CHARSET
+      Font.Color = clBlack
+      Font.Height = -15
+      Font.Name = 'Segoe UI'
+      Font.Pitch = fpVariable
+      Font.Quality = fqDraft
+      Font.Style = [fsBold]
+      ParentColor = False
+      ParentFont = False
+    end
+    object LblProsTitle: TLabel
+      Left = 16
+      Height = 17
+      Top = 32
+      Width = 60
+      Caption = '🚀 Fordele:'
+      Font.CharSet = ANSI_CHARSET
+      Font.Color = 1870624
+      Font.Height = -13
+      Font.Name = 'Segoe UI'
+      Font.Pitch = fpVariable
+      Font.Quality = fqDraft
+      Font.Style = [fsBold]
+      ParentColor = False
+      ParentFont = False
+    end
+    object LblConsTitle: TLabel
+      Left = 520
+      Height = 17
+      Top = 32
+      Width = 65
+      Caption = '⚠️ Ulemper:'
+      Font.CharSet = ANSI_CHARSET
+      Font.Color = 1974003
+      Font.Height = -13
+      Font.Name = 'Segoe UI'
+      Font.Pitch = fpVariable
+      Font.Quality = fqDraft
+      Font.Style = [fsBold]
+      ParentColor = False
+      ParentFont = False
+    end
+    object MemoPros: TMemo
+      Left = 16
+      Height = 90
+      Top = 52
+      Width = 490
+      Color = 16448250
+      Font.CharSet = ANSI_CHARSET
+      Font.Color = clBlack
+      Font.Height = -12
+      Font.Name = 'Segoe UI'
+      Font.Pitch = fpVariable
+      Font.Quality = fqDraft
+      ParentFont = False
+      ReadOnly = True
+      ScrollBars = ssAutoVertical
+      TabOrder = 0
+    end
+    object MemoCons: TMemo
+      Left = 520
+      Height = 90
+      Top = 52
+      Width = 500
+      Anchors = [akTop, akLeft, akRight]
+      Color = 16448250
+      Font.CharSet = ANSI_CHARSET
+      Font.Color = clBlack
+      Font.Height = -12
+      Font.Name = 'Segoe UI'
+      Font.Pitch = fpVariable
+      Font.Quality = fqDraft
+      ParentFont = False
+      ReadOnly = True
+      ScrollBars = ssAutoVertical
+      TabOrder = 1
+    end
+    object BtnApplyCurrentTab: TButton
+      Left = 16
+      Height = 30
+      Top = 150
+      Width = 220
+      Caption = 'Aktivér alle på denne fane'
+      Font.CharSet = ANSI_CHARSET
+      Font.Color = clBlack
+      Font.Height = -12
+      Font.Name = 'Segoe UI'
+      Font.Pitch = fpVariable
+      Font.Quality = fqDraft
+      OnClick = BtnApplyCurrentTabClick
+      ParentFont = False
+      TabOrder = 2
+    end
+    object BtnRestoreCurrentTab: TButton
+      Left = 244
+      Height = 30
+      Top = 150
+      Width = 220
+      Caption = 'Gendan standard på denne fane'
+      Font.CharSet = ANSI_CHARSET
+      Font.Color = clBlack
+      Font.Height = -12
+      Font.Name = 'Segoe UI'
+      Font.Pitch = fpVariable
+      Font.Quality = fqDraft
+      OnClick = BtnRestoreCurrentTabClick
+      ParentFont = False
+      TabOrder = 3
+    end
+  end
+  object StatusBar1: TStatusBar
+    Left = 0
+    Height = 23
+    Top = 697
+    Width = 1040
+    Panels = <>
+    SimplePanel = True
+  end
+  object MainMenu1: TMainMenu
+    Left = 704
+    Top = 16
+    object MenuFile: TMenuItem
+      Caption = '&Filer'
+      object MenuApplyAll: TMenuItem
+        Caption = '&Anvend alle anbefalede tweaks...'
+        OnClick = MenuApplyAllClick
+      end
+      object MenuCreateBackup: TMenuItem
+        Caption = '&Gem fuld sikkerhedskopi af samtlige tweak-parametre...'
+        OnClick = MenuCreateBackupClick
+      end
+      object MenuSep1: TMenuItem
+        Caption = '-'
+      end
+      object MenuRestartWindows: TMenuItem
+        Caption = '&Genstart Windows nu'
+        OnClick = MenuRestartWindowsClick
+      end
+      object MenuExit: TMenuItem
+        Caption = '&Afslut'
+        OnClick = MenuExitClick
+      end
+    end
+    object MenuHelp: TMenuItem
+      Caption = '&Hjælp'
+      object MenuUserGuide: TMenuItem
+        Caption = '&Brugervejledning && Dokumentation...'
+        OnClick = MenuUserGuideClick
+      end
+      object MenuSep2: TMenuItem
+        Caption = '-'
+      end
+      object MenuAbout: TMenuItem
+        Caption = '&Om...'
+        OnClick = MenuAboutClick
+      end
+    end
+  end
+end
