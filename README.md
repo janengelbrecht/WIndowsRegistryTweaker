@@ -271,22 +271,18 @@ Højreklik på skrivebordet → Ny → Genvej.
 
 Angiv placeringen af .exe-filen, f.eks.:
 
-text
+
 C:\Værktøjer\WinRegistryTweaker\WinRegistryTweaker.exe
 Klik Næste, giv genvejen et navn (f.eks. "Registry Tweaker Pro"), klik Udfør.
-
 Højreklik på den nye genvej → Egenskaber → fanen Genvej → knappen Avanceret.
-
 Sæt flueben i "Kør som administrator", klik OK → OK.
-
 Herefter starter et dobbeltklik på genvejen programmet med de nødvendige rettigheder (Windows viser stadig UAC-bekræftelsen).
 
 6. Sådan bygger du projektet fra kildekode
+
 6.1 Forudsætninger
 Lazarus IDE version 2.2.6 eller nyere (anbefalet).
-
 Free Pascal Compiler (FPC 3.2.2 eller nyere) – følger med Lazarus.
-
 Git (valgfrit, men anbefalet til at hente kilden).
 
 6.2 Trin for trin
@@ -298,27 +294,17 @@ cd WinRegistryTweaker
 Åbn projektet i Lazarus:
 
 Start Lazarus.
-
 Vælg Fil → Åbn og naviger til WinRegistryTweaker.lpr.
-
 Klik Åbn.
-
 Kontrollér projektindstillinger:
-
 Vælg Projekt → Projektindstillinger.
-
 Under Compilerindstillinger → Mål, vælg Win64.
-
 Under Compilerindstillinger → Oversættelse, sæt flueben i "Byg med de samme indstillinger som Lazarus selv" (anbefalet).
 
 Byg projektet:
-
 Vælg Kør → Byg (eller tryk Shift+F9).
-
 Hvis bygningen lykkes, findes .exe-filen i projektmappen (typisk WinRegistryTweaker.exe).
-
 Kør programmet:
-
 Vælg Kør → Kør (F9).
 
 Lazarus starter programmet med de nødvendige rettigheder, hvis Lazarus selv kører som administrator. Ellers start programmet manuelt som beskrevet i afsnit 5.2.
@@ -342,18 +328,15 @@ Programmet ændrer indstillinger under både HKEY_CURRENT_USER og HKEY_LOCAL_MAC
 
 7.2 De tre måder at starte programmet korrekt på
 1. Højreklik-metoden (anbefalet til engangsbrug):
-
 Højreklik på WinRegistryTweaker.exe → "Kør som administrator" → "Ja" i UAC-dialogen.
 
 2. Genvejsmetoden (anbefalet til daglig brug):
-
 Opret en genvej med "Kør som administrator" som beskrevet i afsnit 5.3.
 
 3. Kommandolinje-metoden (til avancerede brugere):
-
 Åbn en Kommandoprompt som administrator og skriv:
 
-text
+
 "C:\Værktøjer\WinRegistryTweaker\WinRegistryTweaker.exe"
 7.3 Hvad sker der, hvis man starter uden Administratorrettigheder?
 Programmet viser følgende meddelelse og afslutter sig selv:
@@ -381,59 +364,42 @@ Trin 5 – Genstart computeren
 Vælg Filer → Genstart Windows nu (eller genstart manuelt), så indstillingerne træder i kraft.
 
 Tips til daglig brug
+
 Brug musen eller tastaturet: Hvert afkrydsningsfelt kan nås med Tab-tasten, og fordele/ulemper vises automatisk, når feltet får fokus.
-
 Hold musen over et tweak for at læse den detaljerede beskrivelse i infopanelet.
-
 Brug statuslinjen nederst til at følge med i, hvad programmet laver.
-
 Tag en ny sikkerhedskopi, hver gang du har aktiveret en større batch ændringer.
 
 9. Sikkerhed – læs dette før du begynder
+
 9.1 Programmet er ikke en "magisk optimeringsknap"
 Programmet ændrer systemkritiske indstillinger i Windows. Nogle tweaks påvirker sikkerheden, login-adfærd, netværksfunktioner eller hardwareadfærd. Derfor er det afgørende, at du:
-
 Læser beskrivelserne i infopanelet, før du slår et tweak til.
-
 Aktiverer tweaks gradvist – ikke alle 46 på én gang.
-
 Tager en sikkerhedskopi før større ændringer.
 
 9.2 Hvad gør programmet for at beskytte dig?
 Alle ændringer kan rulles tilbage – både enkeltvis, pr. fane og globalt.
 
 Fuld .reg-backup med korrekt UTF-16LE-kodning og BOM, som kan importeres af Windows' egen regedit.
-
 Batch-bekræftelse: "Anvend alle" kræver en eksplicit bekræftelse, fordi det ændrer login-adfærd.
-
 64-bit registeradgang (KEY_WOW64_64KEY) forhindrer, at 32-bit og 64-bit visninger blandes sammen.
-
 Race condition-fri proceseksekvering: powercfg.exe hentes altid fra den ægte C:\Windows\System32 via GetSafeSystemPath, så et PATH-angreb forhindres.
-
 Event-guard (FUpdatingUI) forhindrer uendelige rekursive kald mellem CheckBoxClick, SetTweakInRegistry og ReadSingleTweakStatus.
-
 Fejlhåndtering: Hvis et tweak fejler, vises en præcis fejlmeddelelse, og brugerfladen ruller tilbage til den faktiske tilstand.
 
 9.3 Hvad programmet IKKE gør
 Det gemmer ikke dine data eller sender dem til Microsoft eller tredjepart.
-
 Det installerer ikke drivere eller baggrundstjenester.
-
 Det ændrer ikke filer uden for registreringsdatabasen – bortset fra powercfg -h off, som sletter C:\hiberfil.sys (og dermed frigør diskplads).
-
 Det kræver ikke internetadgang.
 
 9.4 Før du aktiverer sikkerhedshærdning
 Sikkerhedshærdningstweaksene (kategori 5 og 6) ændrer login- og systemadfærd:
-
 CTRL+ALT+DEL ved login – du skal trykke denne kombination hver gang.
-
 Skjult seneste brugernavn – du skal indtaste både brugernavn og adgangskode hver gang.
-
 Blokeret RDP – du kan ikke fjernstyre computeren via Windows Fjernskrivebord.
-
 Blokeret USB-lager – USB-stik og eksterne diske virker ikke (tastatur og mus påvirkes ikke).
-
 Tøm sidefilen ved nedlukning – forlænger nedlukningstiden markant på maskiner med meget RAM.
 
 Hvis du er i tvivl, så slå disse tweaks til én ad gangen og test, at alt stadig virker, før du fortsætter.
@@ -450,9 +416,7 @@ Gå til det relevante faneblad, og klik "Gendan standard på denne fane". Dette 
 
 3. Rul alt tilbage (sidste udvej)
 Hvis du ikke kan identificere årsagen, og problemet er alvorligt, kan du rulle alle 46 tweaks tilbage:
-
 Gå til hvert faneblad og klik "Gendan standard", eller
-
 Importér den .reg-backup, du tog i trin 2 ovenfor (dobbeltklik filen i Stifinder).
 
 4. Genstart computeren
@@ -468,21 +432,13 @@ Hvis intet andet virker, kan du bruge Windows' indbyggede Systemgendannelse (Win
 Løsning:
 
 Åbn fanebladet "2. Sikkerhed & Privatliv".
-
 Fjern fluebenet ud for "Forhindr uautoriseret USB-lageradgang".
-
 Genstart computeren (vigtigt! USBSTOR-tjenesten skal genstartes).
-
 USB-drevet er nu tilgængeligt igen.
-
 Hvis det stadig ikke virker:
-
 Åbn PowerShell som administrator.
-
 Kør: Get-Service USBSTOR
-
 Status skal vise Stopped (hvilket er normalt, indtil et drev tilsluttes), og StartType skal være Manual eller Automatic.
-
 Hvis StartType stadig er Disabled, kør:
 
 powershell
@@ -495,82 +451,56 @@ og sæt Start til 3 (Manual).
 Årsag: Tweaket "Tving sikker CTRL+ALT+DEL ved login" eller "Fjern senest loggede brugernavn på låseskærm" kan ændre login-adfærden. I sjældne tilfælde kan en forkert kombination af sikkerhedspolitikker blokere normal pålogning.
 
 Løsning (fra en anden konto eller via Sikker Tilstand):
-
 Genstart i Sikker Tilstand (hold Shift nede under genstart, eller tryk F8 under opstart).
-
 Log ind med en administratorkonto.
-
 Åbn programmet (kør som administrator).
-
 Gå til fanebladet "5. Sikkerhedshærdning (Del 1)" og rul alle tweaks tilbage.
-
 Genstart normalt.
-
 Hvis ingen konto virker:
-
 Brug en Windows-installations-USB til at åbne Kommandoprompten via "Reparer computeren → Fejlfinding → Kommandoprompt" og gendan registreringsdatabasen fra en backup, eller brug Systemgendannelse.
 
 11.3 Programmet starter ikke (adgangsfejl ved opstart)
 Årsag: Manglende administratorrettigheder, eller UAC er blevet ændret af en tweak.
 
 Løsning:
-
 Højreklik på .exe-filen og vælg "Kør som administrator".
-
 Hvis dette ikke virker, er UAC måske blevet deaktiveret. Åbn Kontrolpanel → Brugerkonti → Skift indstillinger for Brugerkonti, og sæt skyderen tilbage til standard (næstøverste niveau). Genstart.
 
 11.4 Netværket virker ikke (ingen internetforbindelse)
 Årsag: Tweaket "TcpTimedWaitDelay" eller "Deaktiver QoS-båndbreddereservation" kan i sjældne tilfælde påvirke netværket på specifikke hardwarekonfigurationer.
 
 Løsning:
-
 Åbn fanebladet "4. Netværk & Gaming".
-
 Klik "Gendan standard på denne fane".
-
 Genstart computeren.
-
 Hvis problemet varer ved, kontrollér netværksdriveren i Enhedshåndtering (der kan være behov for en opdatering).
 
 11.5 Spil kører dårligere efter tweaking
 Årsag: Nogle GPU-tweaks (f.eks. HAGS) kan give micro-stuttering på ældre drivere. Ligeledes kan Win32PrioritySeparation påvirke baggrundsprocesser, som nogle spil afhænger af.
 
 Løsning:
-
 Åbn fanebladet "8. Avanceret Kerne & GPU".
-
 Rul HAGS-tweaket tilbage (fjern fluebenet).
-
 Åbn fanebladet "3. System & Ydeevne".
-
 Rul Win32PrioritySeparation tilbage.
-
 Genstart computeren.
 
 11.6 Windows bliver meget langsom ved nedlukning
 Årsag: Tweaket "Tøm sidefilen (Pagefile) ved nedlukning" forlænger nedlukningstiden betydeligt på computere med meget RAM, fordi hele sidefilen (typisk 4–16 GB) skal overskrives.
 
 Løsning:
-
 Åbn fanebladet "5. Sikkerhedshærdning (Del 1)".
-
 Fjern fluebenet ud for "Tøm sidefilen (Pagefile) ved nedlukning".
-
 Genstart computeren.
-
 Bemærk: Dette tweak er kun relevant, hvis du har behov for at beskytte følsomme data mod fysisk udlæsning af disken.
 
 11.7 Dvalefunktionen virker ikke mere
 Årsag: Tweaket "Slå dvale fra (Sletter hiberfil.sys via powercfg)" har deaktiveret dvale og Hurtig Start (Fast Startup).
 
 Løsning:
-
 Åbn fanebladet "3. System & Ydeevne".
-
 Fjern fluebenet ud for "Slå dvale fra".
-
 Genstart computeren.
-
 Hiberfil.sys genskabes automatisk af powercfg ved genstart.
 
 11.8 Windows opfører sig underligt efter "Anvend alle"
@@ -609,74 +539,49 @@ Hvis ingen af ovenstående virker (yderst sjældent), kan en "Nulstil denne pc" 
 
 13. Sådan undgår du problemer fremover
 Tag altid en backup, før du aktiverer mange tweaks på én gang.
-
 Aktivér tweaks gradvist, så du kan identificere årsagen, hvis noget går galt (i stedet for at slå alle 46 til på én gang).
-
 Læs beskrivelserne i infopanelet – de advarer om kendte risici.
-
 Brug "Anvend alle" med forsigtighed – den aktiverer alle tweaks, inklusive sikkerhedshærdning, der ændrer login-adfærd.
-
 Hold styr på, hvad du aktiverer – noter eventuelt, hvilke tweaks du slår til, så du senere kan rulle dem tilbage, hvis problemer opstår.
-
 Test på en ikke-produktionsmaskine først, hvis du administrerer flere computere.
 
 14. Teknisk arkitektur
+
 14.1 Overordnet struktur
 WinRegistryTweaker.lpr – Programmets indgangspunkt. Initialiserer Application, opretter FormMain og starter event-loopet.
-
 uMain.pas – Hjertet i programmet. Indeholder al forretningslogik, UI-generering, registeradgang, backup, genstart og fejlhåndtering.
-
 uMain.lfm – Lazarus' designfil for hovedvinduet (layout, komponenter, egenskaber).
-
 uHelp.pas – Hjælpeenheden med det udvidede hjælpevindue.
-
 uHelp.lfm – Designfil for hjælpevinduet.
-
 WinRegistryTweaker.res – Ressourcefil med ikon, versionsinformation og UAC-manifest.
 
 14.2 Centrale dele af uMain.pas
 Token-baseret kontrol af administratorrettigheder (IsProcessElevated) – undersøger via OpenProcessToken og GetTokenInformation, om processen kører med forhøjede rettigheder.
-
 Dynamisk opbygning af faneblade med parametre (PopulateAllTweaks, BuildUI) – genererer hele brugerfladen ud fra TTweakItem-listen FTweaks. Tilføjer man et nyt tweak til listen, dukker det automatisk op på det korrekte faneblad.
-
 Læsning og skrivning i 64-bit Windows Registry (ReadSingleTweakStatus, SetTweakInRegistry) – anvender altid KEY_WOW64_64KEY, validerer datatyper (rdInteger, rdBinary, rdString, rdExpandString) og håndterer både ægte DWORD-værdier og binært lagrede DWORD.
-
 Processtyring mod System32 med timeout og pipe-tømning (RunCommandCapture, GetSafeSystemPath) – afvikler eksterne værktøjer (powercfg.exe) usynligt med 30-sekunders timeout og fuld opsamling af stdout+stderr.
-
 Eksport af fuld UTF-16LE .reg-sikkerhedskopi med BOM (MenuCreateBackupClick) – genererer en komplet .reg-fil med korrekt UTF-16LE-kodning og BOM ($FEFF), så regedit kan importere den.
-
 Rettighedstildeling (SeShutdownPrivilege) og genstart af pc (RestartComputer) – erhverver SeShutdownPrivilege via OpenProcessToken, LookupPrivilegeValue og AdjustTokenPrivileges, før den kalder ExitWindowsEx med EWX_REBOOT, EWX_FORCEIFHUNG og en planlagt årsagskode.
-
 Åbning af det udvidede hjælpevindue (MenuUserGuideClick) – opretter FormHelp ved første klik og bringer vinduet i forgrunden ved efterfølgende klik.
-
 Event-guarding (FUpdatingUI) – beskytter mod, at programmatiske opdateringer af CheckBox.Checked udløser OnClick og dermed skaber uendelige rekursive kald.
 
 14.3 Datamodel
 Hvert tweak repræsenteres af et TTweakItem-objekt med følgende felter:
 
 CategoryIndex – Hvilket faneblad (0–9) tweaket hører til.
-
 Title – Den synlige overskrift ud for afkrydsningsfeltet.
-
 RootKey – HKEY_CURRENT_USER eller HKEY_LOCAL_MACHINE.
-
 SubKey – Mappestien i registreringsdatabasen.
-
 ValueName – Parameterens navn.
-
 ValKind – vkDWord, vkString, vkEmptyKey eller vkHibernate.
-
 OptimizedDWord / OptimizedStr – Den optimerede værdi.
-
 DefaultDWord / DefaultStr – Fabriksstandardværdien.
-
 DeleteKeyPath – Sti der skal slettes rekursivt ved tilbagerulning (vkEmptyKey).
-
 Pros / Cons – Forklarende fordele og ulemper.
-
 CheckBox – Reference til det visuelle afkrydsningsfelt.
 
 14.4 De fire tweak-typer
+
 vkDWord
 Eksempel: AllowTelemetry = 0. Skrives som REG_DWORD via Reg.WriteInteger.
 
@@ -690,15 +595,12 @@ vkHibernate
 Eksempel: Dvale. Styres via powercfg.exe -h off/on – ikke via registret.
 
 15. Fejlfinding under bygning
+
 15.1 Kompileringsadvarsler
 Programmet undertrykker bevidst følgende advarsler for en ren byggeproces:
-
 WARN 4055 – typekonvertering mellem pointere og ordinals på 64-bit.
-
 WARN 5024 – ubrugte parametre (f.eks. _Shift, _X, _Y i CheckBoxMouseMove).
-
 WARN 5057 – lokale variable, der ikke synes initialiseret.
-
 WARN 6018 – implicit strengtypekonvertering med potentielt datatab.
 
 Disse advarsler er ikke fejl, og de påvirker ikke programmets funktion.
@@ -715,35 +617,15 @@ Dette projekt er udgivet under MIT-licensen. Se LICENSE-filen for detaljer. Du m
 
 16.2 Bidrag
 Bidrag er velkomne! Hvis du finder en fejl eller har en idé til en forbedring:
-
 Opret et issue på GitHub med en klar beskrivelse af problemet eller forslaget.
-
 Indsend en pull request med din ændring. Sørg for, at:
-
 Koden følger Free Pascal's stilguide.
-
 Nye tweaks tilføjes til PopulateAllTweaks med præcise fordele/ulemper.
-
 Ændringer i brugerfladen respekterer høj DPI og tastaturnavigation.
-
 Der tages højde for både HKEY_CURRENT_USER og HKEY_LOCAL_MACHINE.
-
 Fejlhåndtering følger programmets eksisterende mønstre (try/except, FUpdatingUI-guard).
 
 16.3 Kontakt
 Spørgsmål, ros eller kritik kan rettes til projektets issue-tracker på GitHub.
 
 God fornøjelse med Windows Registry Tweaker Pro – og husk altid at tage en sikkerhedskopi, før du begynder at tweake! 🚀
-
-
-## 🛠️ Sådan bygger du projektet fra kildekode
-
-### Forudsætninger
-* [Lazarus IDE](https://www.lazarus-ide.org/) (version 2.2.6 eller nyere anbefales)
-* Free Pascal Compiler (FPC 3.2.2 eller nyere)
-
-### Trin-for-trin
-1. Klon dette repository:
-   ```bash
-   git clone https://github.com/DIT-BRUGERNAVN/WinRegistryTweaker.git
-   cd WinRegistryTweaker
