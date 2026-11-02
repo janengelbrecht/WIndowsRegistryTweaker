@@ -35,6 +35,7 @@
 14. [Teknisk arkitektur](#14-teknisk-arkitektur)
 15. [Fejlfinding under bygning](#15-fejlfinding-under-bygning)
 16. [Bidrag og licens](#16-bidrag-og-licens)
+17. [Anvendelse](#17-anvendelse)
 
 ---
 
