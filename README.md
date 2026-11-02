@@ -5,7 +5,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Build Status](https://img.shields.io/badge/Build-Passing-brightgreen.svg)]()
 
-Et professionelt open-source administrations- og hærdningsværktøj til Microsoft Windows 10 og Windows 11, udviklet i **Free Pascal** og **Lazarus IDE**.
+Et professionelt open-source administrations- og sikkerhedsværktøj til Microsoft Windows 10 og Windows 11, udviklet i **Free Pascal** og **Lazarus IDE**.
 
 Programmet giver en overskuelig, grafisk kontrol over 46 dybdegående systemparametre opdelt i 10 kategorier – med dynamisk visning af fordele og risici samt integreret genstarts- og backup-motor.
 
