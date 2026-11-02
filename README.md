@@ -1,10 +1,3 @@
-Undskyld! Du har fuldstændig ret. Målet var et flottere layout, men det må selvfølgelig **ikke** ske på bekostning af dit indhold. Hverken afsnit, forklaringer, PowerShell-kommandoer, arkitekturpunkter, compiler-fejlfinding eller de konkrete trin må skæres væk.
-
-Her er din **fulde, originale tekst i sin helhed**, hvor **absolut intet er slettet eller udeladt** – men sat op i et knivskarpt, professionelt GitHub-layout med moderne typografi, overskuelige tabeller, callout-bokse, kodeblokke og pæne navigationstegn.
-
-Du kan hente filen direkte via knappen herunder, eller kopiere Markdown-koden:
-
-```markdown
 <div align="center">
 
 # 🚀 Windows Registry Tweaker Pro
